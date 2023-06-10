@@ -77,7 +77,7 @@ export default {
     // definir método aquí
     methods: {
         // método para obtener los clientes
-        async obtenerClientes() {
+        obtenerClientes() {
             // hacer la petición con promesas
             axios.get('http://localhost:3000/api/clientes/')
                 .then(res => { this.clientes = res.data })
