@@ -3,13 +3,21 @@ import './assets/main.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 
+// componente nativo de vue
 import { createApp } from 'vue'
+// componente definido en ese directorio
 import App from './App.vue'
+
+// componente definido en ese directorio
 import ROUTER from './routes';
+
+// componente nativo de cors (depencia)
+import cors from 'cors';
 
 // instancia del componente
 const APP = createApp(App)
 
+APP.use(cors);
 // usar el enrutado
 APP.use(ROUTER);
 
