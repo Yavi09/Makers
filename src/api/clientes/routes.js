@@ -6,7 +6,8 @@ const { getClientes } = require('./queries');
 // instanciar router
 const CLIENTES = Router();
 
-CLIENTES.get('/', getClientes);
+CLIENTES.get('/', getClientes); 
+// validar aquí 
 
 // exportar enrutador
 module.exports = CLIENTES;

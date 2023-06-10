@@ -35,6 +35,11 @@ main {
     display: flex;
     gap: 2%;
 }
+
+.h-100 {
+    height: 100%;
+}
+
 </style>
 
 <!-- espacio para las plantillas -->

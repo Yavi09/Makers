@@ -64,6 +64,7 @@ export default {
     flex-direction: column;
     gap: 5%;
 }
+
 .component-servicio{
     margin-top: 2.5%;
     border-radius: 7px;
