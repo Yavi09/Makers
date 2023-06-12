@@ -22,6 +22,12 @@ import crearServicio from '../views/servicios/crear.vue';
 import crearProducto from '../views/productos/crear.vue';
 import crearCliente from '../views/clientes/crear.vue';
 import crearEmpleado from '../views/empleados/crear.vue';
+
+
+// archivos de editar
+import editarCliente  from '../views/clientes/editar.vue';
+
+
 // intancia del enrutador
 const ROUTER = createRouter({
     // configuración del historial dentro de la ejecucción
@@ -117,8 +123,18 @@ const ROUTER = createRouter({
             name : 'crearReservacion',
             path : '/reservaciones/crear',
             component : crearReservacion
-        }
+        },
+        // TODO: faltan algunos de crear
 
+
+
+            // rutas de actualizar
+        // clientes
+        {
+            name : 'editarCliente',
+            path : '/clientes/editar/:id',
+            component: editarCliente
+        }
 
 
     ]

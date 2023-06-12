@@ -12,7 +12,7 @@
     <div class="container servicios component-servicio">
         <div class="top">
             <h5 class="bold">
-                Cliente
+                Cliente {{ $route.params }}
             </h5>
             <span id="msg">{{ msg }}</span>
         </div>
@@ -92,7 +92,7 @@ import { onlyLtrs, formatDui, formatEmail } from '../../validator.js';
 
 // exportando el componente principal
 export default {
-    name: 'crearCliente',
+    name: 'editarCliente',
     data() {
         return {
             // definir modelo con los datos del cliente

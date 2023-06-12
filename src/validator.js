@@ -8,7 +8,7 @@ let nums = /^[0-9]+$/;
 // exp. reg. dui
 let dui = /^[0-9]{8}[-][0-9]{1}$/;
 // exp. regular para correo
-let mail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+let mail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 /**
  * Método para validar que la cadena de texto solamente tenga letras
  */
@@ -30,5 +30,6 @@ export const formatDui = value => {
 
 export const formatEmail = value => {
     // validar sí coincide con la presión regular
+    // console.log((mail.test(value)));
     return (mail.test(value));
 }
