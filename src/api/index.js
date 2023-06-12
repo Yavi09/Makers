@@ -4,7 +4,7 @@ const EXPRESS = require('express');
 const CORS = require('cors');
 
 // requerir las rutas para clientes
-const clientesRoutes = require('./clientes/routes');
+const clientesRoutes = require('./routes/clientes.routes');
 
 // instanciando express
 const APP = EXPRESS();
