@@ -1,7 +1,7 @@
 // importar enrutador de express
 const { Router } = require('express');
 // importar métodos con las transferencias SQL
-const { get, store, one } = require('../queries/clientes');
+const { get, store, one, change } = require('../queries/clientes');
 // importar validaciones
 const { validateClient } = require('./../validators/clientes')
 
@@ -14,6 +14,8 @@ CLIENTES.get('/', get);
 CLIENTES.post('/', validateClient, store);
 // obtener cliente según id
 CLIENTES.get('/:id', one);
+// actualizar datos
+CLIENTES.put('/:id', change);
 
 // exportar enrutador con los inserts, selects, deletes y updates
 module.exports = CLIENTES;

@@ -135,7 +135,7 @@ export default {
         obtenerClientes() {
             // hacer la petición con promesas
             axios.get('http://localhost:3000/api/clientes/')
-                .then(res => { this.clientes = res.data; console.log(res.data) })
+                .then(res => { this.clientes = res.data; })
                 .catch(e => { console.error(e) })
 
         }

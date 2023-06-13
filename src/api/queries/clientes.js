@@ -29,7 +29,7 @@ const store = async (req, res) => {
             // función
             (err, result) => {
                 // verificar sí existe error
-                // if(err) throw err.message;
+                if(err) throw err.message;
                 // sino enviar estado exitoso
                 res.status(201).send('Cliente agregado' + 'INSERT INTO clientes(nombres, apellidos, dui, telefono, correo, clave, id_estado_usuario_cliente) VALUES ($1, $2, $3, $4, $5, $6, $7)'
                     + [nombres, apellidos, dui, telefono, correo, clave, estado]);
@@ -52,11 +52,40 @@ const one = async (req, res) => {
         // realizar consulta
         const cliente = POOL.query('SELECT * FROM clientes WHERE id_cliente = $1', [idcliente])
         // sí estuvo correcto el proceso, retorna el resultado de la consulta en json
-        if (res.status(200)) {res.json((await cliente).rows)}
+        if (res.status(200)) { res.json((await cliente).rows) }
     } catch (error) {
         console.error(error);
     }
 }
 
+/**
+ * Método para actualizar los datos de un cliente, cliente seleccionada
+ * req, datos del front
+ * res, respuesta del servidor
+ */
+const change = async (req, res) => {
+    try {
+        // convertir a entero el id recibido de la ruta 
+        const idcliente = parseInt(req.params.id);
+        // asignar a un arreglo los valores del req
+        const { nombres, apellidos, dui, telefono, correo, estado } = req.body;
+        // realizar transferencia SQL
+        POOL.query('UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6 WHERE id_cliente = $7',
+            [nombres, apellidos, dui, telefono, correo, estado, idcliente],
+            // error debe ir primero que res
+            (err, results) => {
+                // verificar sí hay un error
+                if (err) {
+                    // throw err.message;
+                }
+                res.status(201).send('Cliente modificado' + 'UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6' +
+                [nombres, apellidos, dui, telefono, correo, estado]);
+            }
+            )
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportar funciones
-module.exports = { get, store, one }
+module.exports = { get, store, one, change }

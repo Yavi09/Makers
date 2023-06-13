@@ -18,7 +18,7 @@
             <span id="msg">{{ msg }}</span>
         </div>
         <hr>
-        <form method="post" @submit.prevent="validateCrear">
+        <form method="post" @submit.prevent="validateUpdate">
             <div class="container">
                 <div class="form-data">
                     <span class="bold">
@@ -77,7 +77,7 @@
                     <router-link to="/clientes" class="btn btn-makers">
                         Cancelar
                     </router-link>
-                    <button type="submit" class="btn btn-makers">Agregar</button>
+                    <button type="submit" class="btn btn-makers">Agregar cambios</button>
 
                 </div>
             </div>
@@ -121,6 +121,8 @@ export default {
     },
     // métodos
     methods: {
+        // método para verificar que el dato que se escribe en los campos tipos textos, 
+        // no contengan números u otros caracteres especiales
         validInputText(text) {
             if (!onlyLtrs(text)) {
                 this.msg = 'Solo se permiten letras';
@@ -132,7 +134,9 @@ export default {
                 this.msg = '';
             }
         },
-        validateCrear() {
+        // método para validar que los datos que se deséan enviar
+        // para cuando todo este correcto actualizar datos
+        validateUpdate() {
             // e.preventDefault();
             // event.preventDefault();
             // obtener los valores
@@ -174,16 +178,16 @@ export default {
             }
             // después de verificar sí todo está correcto hacer inserción
             if (this.validate !== false) {
-                this.crearCliente();
+                this.modificarCliente();
             }
         },
         // método para guardar registro
-        crearCliente() {
+        modificarCliente() {
             // obtener los valores
             let cliente = this.model.cliente;
             if ((cliente.nombres && cliente.apellidos && cliente.clave && cliente.telefono) !== '') {
                 // hacer la petición post, enviando parametro los datos del formulario
-                axios.post('http://localhost:3000/api/clientes', cliente)
+                axios.put('http://localhost:3000/api/clientes/' + this.$route.params.id, this.model.cliente)
                     // sí todo paso de manera correcta
                     .then(res => {
                         // limpiar modelo con los datos cliente
