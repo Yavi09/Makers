@@ -113,6 +113,12 @@ export default {
             validate: false
         }
     },
+    // se ejecuta cuando carga el componente
+    mounted() {
+        // metodo para cargar el cliente
+        this.getCliente(this.$route.params.id);
+    },
+    // métodos
     methods: {
         validInputText(text) {
             if (!onlyLtrs(text)) {
@@ -156,7 +162,7 @@ export default {
                         this.msg = '';
 
                     } else {
-                        
+
                         this.msg = 'Formato de DUI incorrecto'
                         this.validate = false;
                     }
@@ -175,6 +181,7 @@ export default {
             // obtener los valores
             let cliente = this.model.cliente;
             if ((cliente.nombres && cliente.apellidos && cliente.clave && cliente.telefono) !== '') {
+                // hacer la petición post, enviando parametro los datos del formulario
                 axios.post('http://localhost:3000/api/clientes', cliente)
                     // sí todo paso de manera correcta
                     .then(res => {
@@ -198,6 +205,15 @@ export default {
                 this.msg = 'No se permite datos vacíos';
             }
 
+        },
+        // método para obtener datos de cliente
+        getCliente(cliente) {
+            console.log(cliente)
+            // haciendo petión get, enviando el parametro especificado en el .routes.js (idcliente)            
+            axios.get('http://localhost:3000/api/clientes/' + cliente).then(res => {
+                // obtener los datos del cliente
+                console.log(res.data);
+            })
         }
     }
 }

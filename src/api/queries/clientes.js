@@ -39,5 +39,25 @@ const store = async (req, res) => {
     }
 }
 
+/**
+ * Método para obtener cliente, según el registro seleccionado
+ * obtiene unicamente 1 registro
+ * req, datos de la petición
+ * res, respuesta del servidor
+ */
+const one = async (req, res) => {
+    
+    try {
+        // obtener idcliente de los parametros de la url
+        const idcliente = parseInt(req.params.id);
+        // realizar consulta
+        const cliente = POOL.query('SELECT * FROM clientes WHERE id_cliente = $1', [idcliente])
+        // sí estuvo correcto el proceso, retorna el resultado de la consulta en json
+        if (res.status(200)) {res.json((await cliente).rows)}
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // exportar funciones
-module.exports = { get, store }
+module.exports = { get, store, one }
