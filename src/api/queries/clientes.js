@@ -29,7 +29,7 @@ const store = async (req, res) => {
             // función
             (err, result) => {
                 // verificar sí existe error
-                if(err) throw err.message;
+                if (err) throw err.message;
                 // sino enviar estado exitoso
                 res.status(201).send('Cliente agregado' + 'INSERT INTO clientes(nombres, apellidos, dui, telefono, correo, clave, id_estado_usuario_cliente) VALUES ($1, $2, $3, $4, $5, $6, $7)'
                     + [nombres, apellidos, dui, telefono, correo, clave, estado]);
@@ -79,13 +79,40 @@ const change = async (req, res) => {
                     // throw err.message;
                 }
                 res.status(201).send('Cliente modificado' + 'UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6' +
-                [nombres, apellidos, dui, telefono, correo, estado]);
+                    [nombres, apellidos, dui, telefono, correo, estado]);
             }
-            )
+        )
     } catch (error) {
         console.log(error);
     }
 }
 
+
+/**
+ * Método para eliminar un cliente selccionado
+ * req, datos del front
+ * res, respuesta del servidor
+ */
+const destroy = async (req, res) => {
+    try {
+        // console.log(req.params.id)
+        // obtener el idcliente del parametro de la ruta
+        const idcliente = parseInt(req.params.id);
+        // realizar consulta, enviar un array con los parametros y metodo para capturar error
+        POOL.query('DELETE FROM clientes WHERE id_cliente = $1', [idcliente], (err, result) => {
+            if (err) {
+                // quebrar o detener y retornar msg-error
+                // throw err.message;
+            }
+
+            // enviando estado del proceso y mensaje
+            res.status(201).send('Cliente eliminado' + 'DELETE FROM clientes WHERE idcliente = $1' + [idcliente]);
+
+        })
+    } catch (error) {
+        // capturar error
+        console.error(error);
+    }
+}
 // exportar funciones
-module.exports = { get, store, one, change }
+module.exports = { get, store, one, change, destroy }
