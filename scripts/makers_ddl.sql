@@ -5,22 +5,22 @@ CREATE TABLE tipos_servicios(
 	tipo_servicio character varying(30)
 );
 -- tablas estado
-CREATE TABLE estados_servicios(
-	id_estado_servicio serial PRIMARY KEY,
-	estado character varying(25) NOT NULL
-);
-CREATE TABLE estados_facturas(
-	id_estado_factura serial PRIMARY KEY,
-	estado character varying(25) NOT NULL
-);
-CREATE TABLE estados_reservaciones(
-	id_estado_reservacion serial PRIMARY KEY,
-	estado character varying(25) NOT NULL
-);
-CREATE TABLE estados_usuarios(
-	id_estado_usuario serial PRIMARY KEY,
-	estado character varying(25) NOT NULL
-);
+-- CREATE TABLE estados_servicios(
+-- 	id_estado_servicio serial PRIMARY KEY,
+-- 	estado character varying(25) NOT NULL
+-- );
+-- CREATE TABLE estados_facturas(
+-- 	id_estado_factura serial PRIMARY KEY,
+-- 	estado character varying(25) NOT NULL
+-- );
+-- CREATE TABLE estados_reservaciones(
+-- 	id_estado_reservacion serial PRIMARY KEY,
+-- 	estado character varying(25) NOT NULL
+-- );
+-- CREATE TABLE estados_usuarios(
+-- 	id_estado_usuario serial PRIMARY KEY,
+-- 	estado character varying(25) NOT NULL
+-- );
 -- TABLAS INDEPENDIENTES
 CREATE TABLE sucursales(
 	id_sucursal serial PRIMARY KEY,

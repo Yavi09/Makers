@@ -1,18 +1,24 @@
 @import './base.css';
 
 #app {
-  height: 100vh;
-  display: flex;
+    height: 100vh;
+    display: flex;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
-.content{
-  height: 90%;
+
+.content {
+    height: 90%;
 }
+
+.hide {
+    display: none;
+}
+
 /* estilos por defecto de vue */
 /* #app {
 
