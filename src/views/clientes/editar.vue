@@ -6,13 +6,14 @@
 .mb-15vh {
     margin-bottom: 15vh;
 }
+
 </style>
 
 <template>
     <div class="container servicios component-servicio">
         <div class="top">
             <h5 class="bold">
-                Cliente {{ $route.params }}
+                Cliente
             </h5>
             <span id="msg">{{ msg }}</span>
         </div>
@@ -68,7 +69,7 @@
                     <div action="" class="form-2 w-70 flex wp sp-bet">
                         <label for="clave">Contraseña</label>
                         <input type="password" class="form-control" id="clave" minlength="10" v-model="model.cliente.clave"
-                            required>
+                            readonly>
                     </div>
                 </div>
                 <hr>
@@ -212,7 +213,18 @@ export default {
             // haciendo petión get, enviando el parametro especificado en el .routes.js (idcliente)            
             axios.get('http://localhost:3000/api/clientes/' + cliente).then(res => {
                 // obtener los datos del cliente
-                console.log(res.data);
+                const CLIENTE = res.data[0];
+                // asignar los datos a lso inputs
+                this.model.cliente = {
+                    nombres : CLIENTE.nombres,
+                    apellidos : CLIENTE.apellidos,
+                    dui : CLIENTE.dui,
+                    telefono : CLIENTE.telefono,
+                    correo : CLIENTE.correo,
+                    clave : CLIENTE.clave,
+                    estado : CLIENTE.estado
+                }
+                
             })
         }
     }

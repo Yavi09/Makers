@@ -46,7 +46,6 @@ const store = async (req, res) => {
  * res, respuesta del servidor
  */
 const one = async (req, res) => {
-    
     try {
         // obtener idcliente de los parametros de la url
         const idcliente = parseInt(req.params.id);
