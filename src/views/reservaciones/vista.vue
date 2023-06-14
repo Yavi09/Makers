@@ -6,26 +6,13 @@
                 Agregar
             </router-link>
         </div>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Cliente</th>
-                    <th>Empleado</th>                
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <hr>
     </div>
 </template>
 <script>
 // componente para vista
 export default {
-    name : 'reservaciones'
+    name: 'reservaciones'
 }
 
 </script>

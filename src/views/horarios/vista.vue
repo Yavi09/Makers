@@ -6,24 +6,12 @@
                 Agregar
             </button>
         </div>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Apertura</th>
-                    <th>Cierre</th>
-                    <th>Cliente</th>
-                    <th>Empleado</th>                
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <hr>
     </div>
 </template>
 <script>
 export default {
-    name : 'horarios'
+    name: 'horarios'
 }
 
 </script>

@@ -15,23 +15,7 @@
                 Agregar
             </router-link>
         </div>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Nombres</th>
-                    <th>DUI</th>
-                    <th>Telefono</th>
-                    <th>Correo</th>
-                    <th>Sucursal</th>
-                    <th>Horario</th>
-                    <th>Planilla</th>
-                    <th>Cargo</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <hr>
     </div>
 </template>
 <script>
