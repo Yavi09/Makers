@@ -29,7 +29,9 @@ const store = async (req, res) => {
             // función
             (err, result) => {
                 // verificar sí existe error
-                if (err) throw err.message;
+                if (err){
+                    res.send(err.message);
+                } 
                 // sino enviar estado exitoso
                 res.status(201).send('Cliente agregado' + 'INSERT INTO clientes(nombres, apellidos, dui, telefono, correo, clave, id_estado_usuario_cliente) VALUES ($1, $2, $3, $4, $5, $6, $7)'
                     + [nombres, apellidos, dui, telefono, correo, clave, estado]);
@@ -76,7 +78,7 @@ const change = async (req, res) => {
             (err, results) => {
                 // verificar sí hay un error
                 if (err) {
-                    // throw err.message;
+                    res.send(err.message);
                 }
                 res.status(201).send('Cliente modificado' + 'UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6' +
                     [nombres, apellidos, dui, telefono, correo, estado]);

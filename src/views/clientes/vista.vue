@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 2vh;
     height: 85%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .cliente {

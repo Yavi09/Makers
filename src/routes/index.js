@@ -4,6 +4,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // importar interfaces, dashboard (inicio), servicios, productos, clientes
+//#region 
 // empleados, reservaciones, facturas, horarios, sucursales
 import dashboard from "../views/dashboard.vue";
 import servicios from "../views/servicios/vista.vue";
@@ -14,19 +15,28 @@ import reservaciones from '../views/reservaciones/vista.vue';
 import facturas from '../views/facturas/vista.vue';
 import sucursales from '../views/sucursales/vista.vue';
 import horarios from '../views/horarios/vista.vue';
+import tipos from '../views/tipos_servicios/vista.vue';
+import cargos from '../views/cargos/vista.vue';
+import ordenes from '../views/ordenes/vista.vue';
+//#endregion
 
-
+//#region 
 // arcihvos de crear
 import crearReservacion from "../views/reservaciones/crear.vue";
 import crearServicio from '../views/servicios/crear.vue';
 import crearProducto from '../views/productos/crear.vue';
 import crearCliente from '../views/clientes/crear.vue';
 import crearEmpleado from '../views/empleados/crear.vue';
+import crearTipo from '../views/tipos_servicios/crear.vue';
+import crearCargo from '../views/cargos/crear.vue';
+import crearOrden from '../views/ordenes/crear.vue'
+//#endregion
 
-
+//#region 
 // archivos de editar
 import editarCliente  from '../views/clientes/editar.vue';
 
+//#endregion
 
 // intancia del enrutador
 const ROUTER = createRouter({
@@ -40,6 +50,7 @@ const ROUTER = createRouter({
         // path: direcicón url
         // nombre del componente importado
         // inicio
+        //#region 
         {
             name:  'dashboard',
             path: '/dashboard',
@@ -93,8 +104,27 @@ const ROUTER = createRouter({
             path : '/horarios',
             component : horarios
         },
-
-                // rutas de crear
+        // tipos de servicios
+        {
+            name: 'tipos servicios',
+            path : '/servicios/tipos',
+            component : tipos
+        },
+        // cargos
+        {
+            name : 'cargos',
+            path: '/empleados/cargos',
+            component : cargos
+        },
+        // ordenes 
+        {
+            name : 'ordenes',
+            path: '/ordenes',
+            component : ordenes
+        },
+        //#endregion
+                
+            // rutas de crear
         // servicios
         {
             name : 'crearServicio',
@@ -123,6 +153,21 @@ const ROUTER = createRouter({
             name : 'crearReservacion',
             path : '/reservaciones/crear',
             component : crearReservacion
+        },
+        {
+            name : 'crearTipoServicio',
+            path : '/servicios/tipos/crear',
+            component : crearTipo
+        },
+        {
+            name : 'crearCargo',
+            path : '/empleados/cargos/crear',
+            component : crearCargo
+        },
+        {
+            name : 'crearOrden',
+            path : '/ordenes/crear',
+            component : crearOrden
         },
         // TODO: faltan algunos de crear
 

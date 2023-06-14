@@ -6,20 +6,6 @@
                 Agregar
             </button>
         </div>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Dirección</th>
-                    <th>Telefono</th>
-                    <th>Horario</th>
-                    <th>NRC</th>                
-                    <th>NIT</th>
-                    <th>Productos</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <hr>
     </div>
 </template>
