@@ -42,6 +42,7 @@
             <router-link to="/clientes/crear" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
+            <toast :active="show" :msg="msg" :title="title"/>          
         </div>
         <hr>
         <!-- aquí cargar los clientes -->
@@ -79,9 +80,9 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </router-link>
-                                
-                                <svg @click="eliminarCliente(cliente.id_cliente)" width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+
+                                <svg @click="eliminarCliente(cliente.id_cliente)" width="40" height="40" class="button"
+                                    viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M15 36.6673H25C33.3333 36.6673 36.6667 33.334 36.6667 25.0007V15.0007C36.6667 6.66732 33.3333 3.33398 25 3.33398H15C6.66668 3.33398 3.33334 6.66732 3.33334 15.0007V25.0007C3.33334 33.334 6.66668 36.6673 15 36.6673Z"
                                         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -116,13 +117,22 @@
 <script>
 // importar axios para hacer las peticiones
 import axios from 'axios';
+import toast from '../../components/toast.vue';
 
 export default {
     name: 'clientes',
+    // componentes hijos a utilizar
+    components: {
+        toast
+    },
     data() {
         return {
             // arreglo con los clientes
-            clientes: []
+            clientes: [],
+            msg: 'msg',
+            title: 'title-toast',
+            type: 'success',
+            show: false
         }
     },
     // mounted se llaman los métodos que se quiere ejecutar en el load 
@@ -137,21 +147,24 @@ export default {
             axios.get('http://localhost:3000/api/clientes/')
                 .then(res => { this.clientes = res.data; })
                 .catch(e => { console.error(e) })
-
+            this.show = true;
+            setTimeout(() => {
+                this.show =false;
+            }, 4000);
         },
         // metodo para eliminar el cliente seleccionado
         eliminarCliente(idcliente) {
             // esperar confirmación
-            axios.delete('http://localhost:3000/api/clientes/'+idcliente)
-            .then(
-                res=> { 
-                    // mandar alerta
-                    alert(res.data),
-                    // recargar los clientes
-                    this.obtenerClientes();
-                }    
-            )
-        }
+            axios.delete('http://localhost:3000/api/clientes/' + idcliente)
+                .then(
+                    res => {
+                        // mandar alerta
+                        alert(res.data),
+                            // recargar los clientes
+                            this.obtenerClientes();
+                    }
+                )
+        },    
     }
 }
 

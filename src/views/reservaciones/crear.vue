@@ -75,17 +75,17 @@ option {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    background-image: url(../../assets/img/calendar.png) ;
-    background-repeat:  no-repeat;
-    background-size:  cover;
+    background-image: url(../../assets/img/calendar.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     opacity: 1;
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    background-image: url(../../assets/img/time.png) ;
-    background-repeat:  no-repeat;
-    background-size:  cover;
+    background-image: url(../../assets/img/time.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     opacity: 1;
 }
 </style>
@@ -140,8 +140,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                     <div class="load">
                         <div class="mb-3 input-container">
                             <label for="nombres" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="nombres"
-                                v-model="cliente.nombre" readonly>
+                            <input type="text" class="form-control" id="nombres" v-model="cliente.nombre" readonly>
                         </div>
                         <div class="mb-3 input-container">
                             <label for="apellidos" class="form-label">Apellidos</label>
