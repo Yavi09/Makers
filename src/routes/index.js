@@ -29,7 +29,8 @@ import crearCliente from '../views/clientes/crear.vue';
 import crearEmpleado from '../views/empleados/crear.vue';
 import crearTipo from '../views/tipos_servicios/crear.vue';
 import crearCargo from '../views/cargos/crear.vue';
-import crearOrden from '../views/ordenes/crear.vue'
+import crearOrden from '../views/ordenes/crear.vue';
+import crearSucursal from '../views/sucursales/crear.vue';
 //#endregion
 
 //#region 
@@ -168,6 +169,11 @@ const ROUTER = createRouter({
             name : 'crearOrden',
             path : '/ordenes/crear',
             component : crearOrden
+        },
+        {
+            name : 'crearSucursal',
+            path : '/sucursales/crear',
+            component : crearSucursal
         },
         // TODO: faltan algunos de crear
 

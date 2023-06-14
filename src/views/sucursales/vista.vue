@@ -2,9 +2,9 @@
     <div class="container servicios component-servicio">
         <div class="top">
             <span class="bold">Sucursales</span>
-            <button type="button" class="btn btn-makers">
+            <router-link to="/sucursales/crear" type="button" class="btn btn-makers">
                 Agregar
-            </button>
+            </router-link>
         </div>
         <hr>
     </div>
