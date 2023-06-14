@@ -1,33 +1,3 @@
-<template>
-    <!-- <div class="main"> -->
-    <div class="container tipos component-servicio">
-        <span class="bold">
-            Tipos de servicios
-        </span>
-        <router-link to="/servicios/tipos" type="button" class="btn btn-makers">
-            Ver
-        </router-link>
-    </div>
-
-    <div class="container servicios component-servicio">
-        <div class="top">
-            <span class="bold">Servicios</span>
-            <router-link to="/servicios/crear" type="button" class="btn btn-makers">
-                Agregar
-            </router-link>
-        </div>
-        <hr>
-        <!-- Apartir de aquí verificar sí hay datos o servicios -->
-            
-    </div>
-    <!-- </div> -->
-</template>
-<script>
-export default {
-    name: 'servicios'
-}
-
-</script>
 <style>
 .tipos {
     background: #231F1E;
@@ -77,15 +47,34 @@ export default {
     border-color: #b4b0af !important;
     color: #b4b0af !important;
 }
+</style>
+<template>
+    <!-- <div class="main"> -->
+    <div class="container tipos component-servicio">
+        <span class="bold">
+            Tipos de servicios
+        </span>
+        <router-link to="/servicios/tipos" type="button" class="btn btn-makers">
+            Ver
+        </router-link>
+    </div>
 
-.table> :not(caption)>*>* {
-    background: #504c4a;
+    <div class="container servicios component-servicio">
+        <div class="top">
+            <span class="bold">Servicios</span>
+            <router-link to="/servicios/crear" type="button" class="btn btn-makers">
+                Agregar
+            </router-link>
+        </div>
+        <hr>
+        <!-- Apartir de aquí verificar sí hay datos o servicios -->
+
+    </div>
+    <!-- </div> -->
+</template>
+<script>
+export default {
+    name: 'servicios'
 }
 
-th:first-child {
-    border-radius: 7px 0 0 0;
-}
-
-th:last-child {
-    border-radius: 0 7px 0 0;
-}</style>
+</script>

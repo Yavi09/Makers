@@ -3,9 +3,9 @@
         <span class="bold">
             Cargos
         </span>
-        <button type="button" class="btn btn-makers">
+        <router-link to="/empleados/cargos" type="button" class="btn btn-makers">
             Ver
-        </button>
+        </router-link>
     </div>
 
     <div class="container servicios component-servicio">

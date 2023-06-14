@@ -56,7 +56,7 @@
             <li class="li-lista" v-for="(item, index) in this.options" :key="index">
                 <!-- 
               <span class="item">{{ item }}</span> -->
-                <i>icon</i>
+                <!-- <i>icon</i> -->
                 <router-link class="item" :to="item.route">{{ item.option }} </router-link>
             </li>
         </ul>

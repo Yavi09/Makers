@@ -15,6 +15,7 @@ import facturas from '../views/facturas/vista.vue';
 import sucursales from '../views/sucursales/vista.vue';
 import horarios from '../views/horarios/vista.vue';
 import tipos from '../views/tipos_servicios/vista.vue';
+import cargos from '../views/cargos/vista.vue';
 
 // arcihvos de crear
 import crearReservacion from "../views/reservaciones/crear.vue";
@@ -23,6 +24,7 @@ import crearProducto from '../views/productos/crear.vue';
 import crearCliente from '../views/clientes/crear.vue';
 import crearEmpleado from '../views/empleados/crear.vue';
 import crearTipo from '../views/tipos_servicios/crear.vue';
+import crearCargo from '../views/cargos/crear.vue';
 
 // archivos de editar
 import editarCliente  from '../views/clientes/editar.vue';
@@ -98,6 +100,11 @@ const ROUTER = createRouter({
             path : '/servicios/tipos',
             component : tipos
         },
+        {
+            name : 'cargos',
+            path: '/empleados/cargos',
+            component : cargos
+        },
 
                 // rutas de crear
         // servicios
@@ -133,6 +140,11 @@ const ROUTER = createRouter({
             name : 'crearTipoServicio',
             path : '/servicios/tipos/crear',
             component : crearTipo
+        },
+        {
+            name : 'crearCargo',
+            path : '/empleados/cargos/crear',
+            component : crearCargo
         },
         // TODO: faltan algunos de crear
 

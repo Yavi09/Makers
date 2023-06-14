@@ -1,13 +1,8 @@
-<style>
-.mb-50vh{
-    margin-bottom: 50vh;
-}
-</style>
 <template>
     <div class="container servicios component-servicio component-render">
         <div class="top">
             <h5 class="bold">
-                Tipo de servicio
+                Cargo
             </h5>
         </div>
         <hr>
@@ -15,7 +10,7 @@
             <div class="form-data mb-50vh">
                 <form action="" class="form-1">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Tipo de servicio</label>
+                        <label for="nombre" class="form-label">Cargo</label>
                         <input type="text" class="form-control" id="nombre">
                     </div>                
                 </form>
@@ -23,7 +18,7 @@
             </div>
             <hr>
             <div class="buttons-reservacion buttons-servicio form-data">
-                <router-link to="/servicios/tipos" class="btn btn-makers">
+                <router-link to="/empleados/cargos" class="btn btn-makers">
                     Cancelar
                 </router-link>
                 <button type="button" class="btn btn-makers">Agregar</button>
@@ -34,7 +29,7 @@
 <script>
 // definir componente 
 export default {
-    name: "crearTipoServicio",
+    name: "crearCargo",
     data () {
         return {
 
