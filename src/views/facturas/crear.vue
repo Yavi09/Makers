@@ -60,7 +60,7 @@
 <script>
 export default {
     // nombre del componente
-    name: "crearReservacion",
+    name: "crearFactura",
     // funciones que retornará el componente
     data() {
         return {

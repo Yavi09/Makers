@@ -41,6 +41,9 @@ import editarCliente from '../views/clientes/editar.vue';
 
 //#endregion
 
+// configuración
+import config from '../views/configuracion.vue';
+
 // intancia del enrutador
 const ROUTER = createRouter({
     // configuración del historial dentro de la ejecucción
@@ -197,9 +200,15 @@ const ROUTER = createRouter({
             name: 'editarCliente',
             path: '/clientes/editar/:id',
             component: editarCliente
+        },
+
+
+        // configuración
+        {
+            name: 'configuracion',
+            path: '/configuracion',
+            component: config
         }
-
-
     ]
 })
 
