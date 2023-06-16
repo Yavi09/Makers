@@ -32,11 +32,12 @@ import crearCargo from '../views/cargos/crear.vue';
 import crearOrden from '../views/ordenes/crear.vue';
 import crearSucursal from '../views/sucursales/crear.vue';
 import crearHorario from '../views/horarios/crear.vue';
+import crearFactura from '../views/facturas/crear.vue';
 //#endregion
 
 //#region 
 // archivos de editar
-import editarCliente  from '../views/clientes/editar.vue';
+import editarCliente from '../views/clientes/editar.vue';
 
 //#endregion
 
@@ -47,149 +48,154 @@ const ROUTER = createRouter({
     // la url base del proyecto
     history: createWebHistory(import.meta.env.BASE_URL),
     // definiendo arreglo con las rutas
-    routes : [
+    routes: [
         // nombre de la ruta para ser llamada en el sidebar
         // path: direcicón url
         // nombre del componente importado
         // inicio
         //#region 
         {
-            name:  'dashboard',
+            name: 'dashboard',
             path: '/dashboard',
-            component : dashboard
+            component: dashboard
         },
         // servicios
         {
             name: 'servicios',
-            path : '/servicios',
-            component : servicios
+            path: '/servicios',
+            component: servicios
         },
         // productos 
         {
-            name : 'productos',
-            path : '/productos',
-            component : productos
+            name: 'productos',
+            path: '/productos',
+            component: productos
         },
         // clientes
         {
-            name : 'clientes',
-            path : '/clientes',
-            component : clientes
+            name: 'clientes',
+            path: '/clientes',
+            component: clientes
         },
         // empleados
         {
-            name : 'empleados',
-            path : '/empleados',
-            component : empleados
+            name: 'empleados',
+            path: '/empleados',
+            component: empleados
         },
         // reservaciones
         {
-            name : 'reservaciones',
-            path : '/reservaciones',
-            component : reservaciones
+            name: 'reservaciones',
+            path: '/reservaciones',
+            component: reservaciones
         },
         // facturas
         {
-            name : 'facturas',
-            path : '/facturas',
-            component : facturas
+            name: 'facturas',
+            path: '/facturas',
+            component: facturas
         },
         // sucursales
         {
-            name : 'sucursales',
-            path : '/sucursales',
-            component : sucursales
+            name: 'sucursales',
+            path: '/sucursales',
+            component: sucursales
         },
         // horarios
         {
-            name : 'horarios',
-            path : '/horarios',
-            component : horarios
+            name: 'horarios',
+            path: '/horarios',
+            component: horarios
         },
         // tipos de servicios
         {
             name: 'tipos servicios',
-            path : '/servicios/tipos',
-            component : tipos
+            path: '/servicios/tipos',
+            component: tipos
         },
         // cargos
         {
-            name : 'cargos',
+            name: 'cargos',
             path: '/empleados/cargos',
-            component : cargos
+            component: cargos
         },
         // ordenes 
         {
-            name : 'ordenes',
+            name: 'ordenes',
             path: '/ordenes',
-            component : ordenes
+            component: ordenes
         },
         //#endregion
-                
-            // rutas de crear
+
+        // rutas de crear
         // servicios
         {
-            name : 'crearServicio',
-            path : '/servicios/crear',
-            component : crearServicio
+            name: 'crearServicio',
+            path: '/servicios/crear',
+            component: crearServicio
 
         },
         // productos
         {
-            name : 'crearProducto',
-            path : '/productos/crear',
-            component : crearProducto
+            name: 'crearProducto',
+            path: '/productos/crear',
+            component: crearProducto
         },
         {
-            name : 'crearCliente',
-            path : '/clientes/crear',
-            component : crearCliente
+            name: 'crearCliente',
+            path: '/clientes/crear',
+            component: crearCliente
         },
         {
-            name : 'crearEmpleado',
-            path : '/empleados/crear',
-            component : crearEmpleado
+            name: 'crearEmpleado',
+            path: '/empleados/crear',
+            component: crearEmpleado
         },
         // reservacion
         {
-            name : 'crearReservacion',
-            path : '/reservaciones/crear',
-            component : crearReservacion
+            name: 'crearReservacion',
+            path: '/reservaciones/crear',
+            component: crearReservacion
         },
         {
-            name : 'crearTipoServicio',
-            path : '/servicios/tipos/crear',
-            component : crearTipo
+            name: 'crearTipoServicio',
+            path: '/servicios/tipos/crear',
+            component: crearTipo
         },
         {
-            name : 'crearCargo',
-            path : '/empleados/cargos/crear',
-            component : crearCargo
+            name: 'crearCargo',
+            path: '/empleados/cargos/crear',
+            component: crearCargo
         },
         {
-            name : 'crearOrden',
-            path : '/ordenes/crear',
-            component : crearOrden
+            name: 'crearOrden',
+            path: '/ordenes/crear',
+            component: crearOrden
         },
         {
-            name : 'crearSucursal',
-            path : '/sucursales/crear',
-            component : crearSucursal
+            name: 'crearSucursal',
+            path: '/sucursales/crear',
+            component: crearSucursal
         },
         {
-            name : 'crearHorario',
-            path : '/horarios/crear',
-            component : crearHorario
+            name: 'crearHorario',
+            path: '/horarios/crear',
+            component: crearHorario
+        },
+        {
+            name: 'crearFactura',
+            path: '/facturas/crear',
+            component: crearFactura
         },
         // TODO: faltan algunos de crear
 
 
 
-            // rutas de actualizar
+        // rutas de actualizar
         // clientes
         {
-            name : 'editarCliente',
-            path : '/clientes/editar/:id',
+            name: 'editarCliente',
+            path: '/clientes/editar/:id',
             component: editarCliente
         }
 

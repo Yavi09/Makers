@@ -42,7 +42,8 @@
             <router-link to="/clientes/crear" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
-            <toast :active="show" :msg="msg" :title="title"/>          
+            <button type="button" @click="toast" class="btn btn-makers">Ver</button>
+            <toast :msg="msg" :title="title" />
         </div>
         <hr>
         <!-- aquí cargar los clientes -->
@@ -132,7 +133,6 @@ export default {
             msg: 'msg',
             title: 'title-toast',
             type: 'success',
-            show: false
         }
     },
     // mounted se llaman los métodos que se quiere ejecutar en el load 
@@ -146,11 +146,8 @@ export default {
             // hacer la petición con promesas
             axios.get('http://localhost:3000/api/clientes/')
                 .then(res => { this.clientes = res.data; })
-                .catch(e => { console.error(e) })
-            this.show = true;
-            setTimeout(() => {
-                this.show =false;
-            }, 4000);
+                .catch(e => { console.error(e); })
+
         },
         // metodo para eliminar el cliente seleccionado
         eliminarCliente(idcliente) {
@@ -164,7 +161,7 @@ export default {
                             this.obtenerClientes();
                     }
                 )
-        },    
+        },
     }
 }
 
