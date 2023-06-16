@@ -171,3 +171,6 @@ CREATE TABLE facturas(
 	CONSTRAINT fk_sucursal_factura FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal),
 	CONSTRAINT id_empleado_factura FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
 );
+
+ALTER TABLE detalles_servicios_sucursales ADD COLUMN cantidad integer not null default 1;
+ALTER TABLE detalles_servicios_sucursales ADD CONSTRAINT chk_cantidad_servicio_sucursal CHECK (cantidad >= 1)

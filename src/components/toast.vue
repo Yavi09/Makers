@@ -5,15 +5,20 @@
     right: 30px;
     border-radius: 12px;
     background: #393534;
-    padding: 20px 35px 20px 25px;
+    padding: 1%;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    border-left: 6px solid #4070f4;
+    border-left: 6px solid var(--bs-toast-border-color);
     overflow: hidden;
     transform: translateX(calc(100% + 30px));
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 }
 
+/* .toast:not(.show) {
+    display: block;
+} */
+
 .toast.active {
+    opacity: 90%;
     transform: translateX(0%);
 }
 
@@ -28,7 +33,7 @@
     justify-content: center;
     height: 35px;
     width: 35px;
-    background-color: #4070f4;
+    background-color: var(--bs-toast-border-color);
     color: #fff;
     font-size: 20px;
     border-radius: 50%;
@@ -41,7 +46,7 @@
 }
 
 .message .text {
-    font-size: 20px;
+    font-size: initial;
     font-weight: 400;
     color: var(--bs-card-color);
 }
@@ -80,7 +85,7 @@
     right: 0;
     height: 100%;
     width: 100%;
-    background-color: #4070f4;
+    background-color: var(--bs-toast-border-color);
 }
 
 .progress.active:before {
@@ -116,6 +121,7 @@ button:hover {
 }
 </style>
 <template>
+    
     <div class="toast active">
         <div class="toast-content">
             <i class="fas fa-solid fa-check check"></i>
@@ -134,10 +140,6 @@ button:hover {
 export default {
     name: 'toast',
     props: {
-        active: {
-            type: Boolean,
-            required: true
-        },
         msg: {
             type: String,
             required: true
@@ -153,6 +155,24 @@ export default {
         }
     },
     methods: {
+        toast() {
+            const button = document.querySelector("button"),
+                toast = document.querySelector(".toast"),
+                progress = document.querySelector(".progress");
+
+            button.addEventListener("click", () => {
+                toast.classList.add("active");
+                progress.classList.add("active");
+
+                timer1 = setTimeout(() => {
+                    toast.classList.remove("active");
+                }, 5000);  //1s = 1000 millisegundos
+
+                timer2 = setTimeout(() => {
+                    progress.classList.remove("active");
+                }, 5300);
+            });
+        },
         showToast() {
             // acceder a las props
             // this.msg
