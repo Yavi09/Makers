@@ -11,6 +11,9 @@
 .w-25 {
     width: 25%;
 }
+.mb-40vh{
+    margin-bottom: 40vh !important;
+}
 </style>
 <template>
     <div class="container servicios component-servicio component-render">

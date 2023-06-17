@@ -42,8 +42,6 @@
             <router-link to="/clientes/crear" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
-            <button type="button" @click="toast" class="btn btn-makers">Ver</button>
-            <toast :msg="msg" :title="title" />
         </div>
         <hr>
         <!-- aquí cargar los clientes -->

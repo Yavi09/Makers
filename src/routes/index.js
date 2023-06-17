@@ -18,6 +18,8 @@ import horarios from '../views/horarios/vista.vue';
 import tipos from '../views/tipos_servicios/vista.vue';
 import cargos from '../views/cargos/vista.vue';
 import ordenes from '../views/ordenes/vista.vue';
+// vista de los formularios hijos
+import productosSucursales from '../views/sucursales/productos/vista.vue';
 //#endregion
 
 //#region 
@@ -33,6 +35,7 @@ import crearOrden from '../views/ordenes/crear.vue';
 import crearSucursal from '../views/sucursales/crear.vue';
 import crearHorario from '../views/horarios/crear.vue';
 import crearFactura from '../views/facturas/crear.vue';
+import crearProductoSucursal from '../views/sucursales/productos/crear.vue';
 //#endregion
 
 //#region 
@@ -128,6 +131,12 @@ const ROUTER = createRouter({
             path: '/ordenes',
             component: ordenes
         },
+        // productos sucursales
+        {
+            name: 'productosSucursales',
+            path: '/sucursales/productos',
+            component: productosSucursales
+        },
         //#endregion
 
         // rutas de crear
@@ -189,6 +198,11 @@ const ROUTER = createRouter({
             name: 'crearFactura',
             path: '/facturas/crear',
             component: crearFactura
+        },
+        {
+            name: 'crearProductoSucursal',
+            path: '/sucursales/productos/crear',
+            component: crearProductoSucursal
         },
         // TODO: faltan algunos de crear
 
