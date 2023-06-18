@@ -14,6 +14,7 @@
             <h5 class="bold">
                 Empleado
             </h5>
+            <span>{{ msg }}</span>
         </div>
         <hr>
         <form @submit.prevent="crear">
@@ -167,7 +168,9 @@ export default {
                     cargo: 'Seleccionar',
                     horario: 'Seleccionar',
                 }
-            }
+            },
+            // mostrarle al cliente mensajes
+            msg: ''
         }
     },
     mounted() {
@@ -207,6 +210,39 @@ export default {
         },
         crear() {
             // validar datos
+            console.log(this.model.empleado);
+            // realizar petición y enviando datos
+            axios.post('http://localhost:3000/api/empleados', this.model.empleado)
+                .then(res => {
+                    // cuando hay un error 400 que no realizo lo que se debía
+                    if (res.data.error) {
+                        this.msg = 'Error con algún dato enviado';
+                        console.log(res.data)
+                    }
+                    // cuando si se realizo la tarea deceada y se creo algo 
+                    // 201 es usado en método post y put
+                    if (res.status === 201 && !res.data.error) {
+                        // limpiar valores 
+                        this.model.empleado = {
+                            nombres: '',
+                            apellidos: '',
+                            dui: '',
+                            clave: '',
+                            planilla: '',
+                            telefono: '',
+                            correo: '',
+                            sucursal: 'Seleccionar',
+                            cargo: 'Seleccionar',
+                            horario: 'Seleccionar',
+                        }                    
+                    }
+                    console.log(res)
+
+                    // sí la respuesta fue la esperada, redirección a la vista principal
+                    // if (res.status === 201) this.$router.push('/empleados');
+                })
+                .catch(e => { console.log()});
+
         }
     }
 } 

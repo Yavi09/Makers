@@ -71,23 +71,38 @@ const getCargos = async (req, res) => {
  * Método para crear un empleado
  */
 const store = (req, res) => {
+    let msg = '';
+    let status = '';
     try {
         // obtener los datos del req
         const { nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo } = req.body;
         // realizar query o insert y enviarle los parametros
-        POOL.query('INSERT INTO empleados(nombres, apellidos, dui, telefono, correo, clave, planilla, id_sucursal, id_horario, id_cargo VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10)'
-        [nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo],
-        (err, result) => {
-            // verificar sí hubo un error
-            if (err) res.status(400).send(err.message);
-            // verificar estado satisfactorio
-            if (condition) res.status(201).send('Empleado agregado')
-        }
-        )
+        POOL.query('INSERT INTO empleados(nombres, apellidos, dui, clave, planilla, telefono, correo,id_sucursal, id_horario, id_cargo) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10)',
+            [nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo], (err, result) => {
+
+                // verificar sí hubo un error                
+                // if (err) {
+                //     // res.status(400);
+                //     // res.send(err.message);
+                //     msg = err.message;
+                //     // status = 400;
+                // } else {
+                //     msg = 'Empleado agregado';
+                //     status = 201;
+                // }
+                if (err) {
+                    // sí es ejecuta esto, el status 201 no se enviará
+                    res.json({ error: err.message});
+                    return;
+                }
+                res.status(201).send('Empleado agregado' + 'INSERT INTO empleados(nombres, apellidos, dui, telefono, correo, clave, planilla, id_sucursal, id_horario, id_cargo) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10)' + [nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo]);
+                // verificar estado satisfactorio
+                // res.status(201).send('Empleado agregado')
+            })
     } catch (error) {
-        console.error(error)
+        console.log(error)
     }
 }
 
 // exportación de modulos
-module.exports = { get, getSucursales, getHorarios, getCargos }
+module.exports = { get, getSucursales, getHorarios, getCargos, store }
