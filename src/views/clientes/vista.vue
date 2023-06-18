@@ -1,5 +1,5 @@
 <style>
-.clientes {
+.data {
     display: flex;
     flex-direction: column;
     gap: 2vh;
@@ -46,7 +46,7 @@
         <hr>
         <!-- aquí cargar los clientes -->
         <!-- verificar sí hay clientes -->
-        <div class="clientes p-2" v-if="clientes.length > 0">
+        <div class="data p-2" v-if="clientes.length > 0">
             <!-- recorrer los clientes encontrados -->
 
             <div class="card" v-for="(cliente, i) in clientes" :key="i">

@@ -174,3 +174,12 @@ CREATE TABLE facturas(
 
 ALTER TABLE detalles_servicios_sucursales ADD COLUMN cantidad integer not null default 1;
 ALTER TABLE detalles_servicios_sucursales ADD CONSTRAINT chk_cantidad_servicio_sucursal CHECK (cantidad >= 1)
+
+CREATE VIEW empledos_view AS 
+SELECT	e.id_empleado, CONCAT(e.nombres || ' '||e.apellidos) as nombres, e.dui, e.telefono, e.correo, e.planilla, 
+		s.direccion, CONCAT(h.hora_apertura || '-' || h.hora_cierre) as horario, c.cargo
+FROM empleados e
+INNER JOIN sucursales s ON e.id_sucursal = s.id_sucursal
+INNER JOIN horarios h ON e.id_horario = h.id_horario
+INNER JOIN cargos c ON e.id_cargo = c.id_cargo
+ORDER BY e.id_empleado ASC

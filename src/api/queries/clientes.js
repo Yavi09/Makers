@@ -7,9 +7,9 @@ const POOL = require('../db');
 const get = async (req, res) => {
     try {
         // realizar consulta
-        const clientes = await POOL.query('SELECT * FROM clientes');
+        const CLIENTES = await POOL.query('SELECT * FROM clientes');
         // verificar el estado
-        if (res.status(200)) res.json(clientes.rows)
+        if (res.status(200)) res.json(CLIENTES.rows)
     } catch (e) {
         console.error(e.message);
     }
@@ -68,12 +68,12 @@ const one = async (req, res) => {
 const change = async (req, res) => {
     try {
         // convertir a entero el id recibido de la ruta 
-        const idcliente = parseInt(req.params.id);
+        const IDCLIENTE = parseInt(req.params.id);
         // asignar a un arreglo los valores del req
         const { nombres, apellidos, dui, telefono, correo, estado } = req.body;
         // realizar transferencia SQL
         POOL.query('UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6 WHERE id_cliente = $7',
-            [nombres, apellidos, dui, telefono, correo, estado, idcliente],
+            [nombres, apellidos, dui, telefono, correo, estado, IDCLIENTE],
             // error debe ir primero que res
             (err, results) => {
                 // verificar sí hay un error
@@ -99,16 +99,16 @@ const destroy = async (req, res) => {
     try {
         // console.log(req.params.id)
         // obtener el idcliente del parametro de la ruta
-        const idcliente = parseInt(req.params.id);
+        const IDCLIENTE = parseInt(req.params.id);
         // realizar consulta, enviar un array con los parametros y metodo para capturar error
-        POOL.query('DELETE FROM clientes WHERE id_cliente = $1', [idcliente], (err, result) => {
+        POOL.query('DELETE FROM clientes WHERE id_cliente = $1', [IDCLIENTE], (err, result) => {
             if (err) {
                 // quebrar o detener y retornar msg-error
                 // throw err.message;
             }
 
             // enviando estado del proceso y mensaje
-            res.status(201).send('Cliente eliminado' + 'DELETE FROM clientes WHERE idcliente = $1' + [idcliente]);
+            res.status(201).send('Cliente eliminado' + 'DELETE FROM clientes WHERE idcliente = $1' + [IDCLIENTE]);
 
         })
     } catch (error) {
