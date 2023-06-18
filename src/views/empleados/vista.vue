@@ -19,6 +19,8 @@
     </div>
 </template>
 <script>
+// importar axios para realizar peticiones
+import axios from 'axios';
 export default {
     name: 'empleados'
 }
