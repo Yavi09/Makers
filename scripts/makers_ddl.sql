@@ -183,3 +183,6 @@ INNER JOIN sucursales s ON e.id_sucursal = s.id_sucursal
 INNER JOIN horarios h ON e.id_horario = h.id_horario
 INNER JOIN cargos c ON e.id_cargo = c.id_cargo
 ORDER BY e.id_empleado ASC
+
+ALTER TABLE empleados DROP id_estado_empleado
+ALTER TABLE empleados ADD COLUMN estado INTEGER NOT NULL DEFAULT 1
