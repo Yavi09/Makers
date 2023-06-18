@@ -1,7 +1,7 @@
 // requerir del ruteados para activar los métodos 
 const { Router} = require('express');
 // requerir los métodos de los queries
-const { get, getSucursales } = require('../queries/empleados');
+const { get, getSucursales, getHorarios } = require('../queries/empleados');
 
 // instanciado router
 const EMPLEADO = Router();
@@ -9,6 +9,7 @@ const EMPLEADO = Router();
 // métodos para hacer acciónes
 EMPLEADO.get('/', get);
 EMPLEADO.get('/get', getSucursales);
+EMPLEADO.get('/get', getHorarios);
 
 // exportar ruteador
 module.exports = EMPLEADO;

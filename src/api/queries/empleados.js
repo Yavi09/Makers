@@ -35,5 +35,19 @@ const getSucursales = async (req, res) => {
     }
 }
 
+/**
+ * Método para obtener los horarios que puede tener un empleado
+ */
+const getHorarios = async (req, res) => {
+    try {
+        // realizar consulta
+        const HORARIOS = await POOL.query('SELECT * FROM horarios'); // con * tardo .120 mls
+        // verificar respuesta satisfeca
+        if (res.status(200)) res.json(HORARIOS.rows);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // exportación de modulos
-module.exports = { get, getSucursales }
+module.exports = { get, getSucursales, getHorarios }
