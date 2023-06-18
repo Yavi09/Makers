@@ -28,8 +28,9 @@ const getSucursales = async (req, res) => {
     try {
         // realizar consulta
         const SUCURSALES = await POOL.query('SELECT id_sucursal, direccion FROM sucursales');
+        const HORARIOS = await POOL.query('SELECT * FROM horarios')
         // verificar respuesta satisfactoria, para enviar los datos
-        if (res.status(200)) res.json(SUCURSALES.rows)
+        if (res.status(200)) res.json(SUCURSALES.rows);
     } catch (error) {
         console.error(error);
     }
@@ -40,8 +41,10 @@ const getSucursales = async (req, res) => {
  */
 const getHorarios = async (req, res) => {
     try {
+        // formato de hora HH12:mm
+        let formato = 'HH12:MI';
         // realizar consulta
-        const HORARIOS = await POOL.query('SELECT * FROM horarios'); // con * tardo .120 mls
+        const HORARIOS = await POOL.query('SELECT id_horario, to_char(hora_apertura, $1) as inicio, to_char(hora_cierre, $1) as cierre FROM horarios', [formato]); // con * tardo .118 mls
         // verificar respuesta satisfeca
         if (res.status(200)) res.json(HORARIOS.rows);
     } catch (error) {

@@ -8,8 +8,8 @@ const EMPLEADO = Router();
 
 // métodos para hacer acciónes
 EMPLEADO.get('/', get);
-EMPLEADO.get('/get', getSucursales);
-EMPLEADO.get('/get', getHorarios);
+EMPLEADO.get('/sucursales', getSucursales);
+EMPLEADO.get('/horarios', getHorarios);
 
 // exportar ruteador
 module.exports = EMPLEADO;
