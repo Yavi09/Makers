@@ -44,6 +44,7 @@ import crearDetalle from '../views/ordenes/detalle/crear.vue';
 // archivos de editar
 import editarCliente from '../views/clientes/editar.vue';
 import editarEmpleado from '../views/empleados/editar.vue';
+import editarProductoSucursal from '../views/sucursales/productos/editar.vue';
 //#endregion
 
 // configuración
@@ -235,6 +236,11 @@ const ROUTER = createRouter({
             name: 'editarEmpleado',
             path: '/empleados/editar/:id',
             component: editarEmpleado
+        },
+        {
+            name: 'editarProductoSucursal',
+            path: '/sucursales/:id/productos/editar/:detalle',
+            component: editarProductoSucursal
         },
 
 

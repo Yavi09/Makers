@@ -193,3 +193,8 @@ CREATE VIEW productos_view AS
 SELECT *
 FROM servicios
 WHERE id_tipo_servicio = (SELECT id_tipo_servicio FROM tipos_servicios WHERE tipo_servicio = 'Producto')
+
+CREATE VIEW productos_sucursales_view AS
+SELECT s.nombre_servicio, s.id_servicio, s.existencias, ds.cantidad, ds.id_detalle
+FROM detalles_servicios_sucursales ds
+INNER JOIN servicios s ON s.id_servicio = ds.id_servicio

@@ -43,7 +43,6 @@ const store = (req, res) => {
     try {
         // obtener los datos del frontend
         const { sucursal, producto, cantidad } = req.body;
-        console.log(req.body);
         // realizar transacción SQL
         POOL.query('INSERT INTO detalles_servicios_sucursales(id_sucursal, id_servicio, cantidad) VALUES ($1, $2, $3)',
             [sucursal, producto, cantidad], (err, result) => {
@@ -60,6 +59,21 @@ const store = (req, res) => {
     }
 }
 
+/**
+ * Método para obtener los datos del registro del producto en la sucursal
+ */
+const one = async (req, res) => {
+    try {
+        // obtener el del detalle de la url
+        const DETALLE = parseInt(req.params.id);
+        // realizar query
+        const PRODUCTO = await POOL.query('SELECT * FROM detalles_servicios_sucursales WHERE id_detalle = $1', [DETALLE]);
+        // vefificar respuesta satisfactoria
+        if(res.status(200)) res.json(PRODUCTO.rows[0]);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // exportar modulos con los queries
-module.exports = { get, getProductos, store };
+module.exports = { get, getProductos, store, one };

@@ -25,7 +25,7 @@
         </div>
         <hr>
         <div class="container router-view">
-            <form @submit.prevent="crear">
+            <form @submit.prevent="">
                 <div class="form-data mb-24-2vh">
                     <span class="bold">
                         Producto
@@ -87,7 +87,9 @@ export default {
         }
     },
     mounted() {
+        // llamar aquí los método al cargar la página
         this.cargarProductos();
+        this.cargar(this.$route.params.detalle);
     },
     // métodos del componente
     methods: {
@@ -99,35 +101,20 @@ export default {
                 })
                 .catch(e => { console.log(e) })
         },
-        crear() {
-            console.log(this.model.producto)
-            // validar datos
-            axios.post('http://localhost:3000/api/sucursales/productos/', this.model.producto)
+        cargar(detalle) {
+            axios.get('http://localhost:3000/api/sucursales/productos/detalle/'+detalle)
                 .then(res => {
-                    // cuando hay un error que no realizo lo que se debía
-                    if (res.data.error) {
-                        this.msg = 'Error con algún dato enviado';
-                        // console.log(res.data)
-                    }else{
-                        this.msg = '';
-                    }
-                    // cuando si se realizo la tarea deceada y se creo algo 
-                    // 201 es usado en método post y put
-                    if (res.status === 201 && !res.data.error) {
-                        // limpiar valores 
-                        this.model.producto = {
-                            cantidad: '',                                                
-                            producto: 'Seleccionar',
-                        }
-                        // redireccionar
-                        alert('Producto agregado')
-                        this.$router.push('/sucursales/'+this.$route.params.id+'/productos');
+                    // cargar los valores
+                    // const DETALLE = res.data[0];
+                    // console.log(DETALLE);
+                    this.model.producto = {
+                        producto: res.data.id_servicio,
+                        cantidad: res.data.cantidad
                     }
                 })
-                .catch(err => {
-                    alert(err)
-                })
+                .catch(e => {alert(e)})
         }
+        
     }
 }
 

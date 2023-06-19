@@ -1,13 +1,14 @@
 // requerir del enrutador de express
 const { Router } = require('express');
 // requerir de los queries
-const { get, getProductos, store } = require('../queries/productos_sucursales');
+const { get, getProductos, store, one } = require('../queries/productos_sucursales');
 
 // instanciar Router
 const PRODUCTOS = Router();
 // ir a index.js de api para usar o habilitar estas rutas
 
 PRODUCTOS.get('/productos', getProductos);
+PRODUCTOS.get('/detalle/:id', one);
 PRODUCTOS.get('/:id', get);
 PRODUCTOS.post('/', store);
 
