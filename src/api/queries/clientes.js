@@ -50,11 +50,11 @@ const store = async (req, res) => {
 const one = async (req, res) => {
     try {
         // obtener idcliente de los parametros de la url
-        const idcliente = parseInt(req.params.id);
+        const IDCLIENTE = parseInt(req.params.id);
         // realizar consulta
-        const cliente = POOL.query('SELECT * FROM clientes WHERE id_cliente = $1', [idcliente])
+        const CLIENTE = POOL.query('SELECT * FROM clientes WHERE id_cliente = $1', [IDCLIENTE])
         // sí estuvo correcto el proceso, retorna el resultado de la consulta en json
-        if (res.status(200)) { res.json((await cliente).rows) }
+        if (res.status(200)) { res.json((await CLIENTE).rows) }
     } catch (error) {
         console.error(error);
     }

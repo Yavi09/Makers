@@ -25,7 +25,7 @@
             <span>{{ msg }}</span>
         </div>
         <hr>
-        <form @submit.prevent="crear">
+        <form @submit.prevent="">
 
             <div class="container">
                 <div class="form-data">
@@ -125,7 +125,7 @@
                             </div>
                             <div class="mb-3 input-container width-35">
                                 <label for="clave" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="clave" v-model="this.model.empleado.clave">
+                                <input type="password" class="form-control" id="clave" readonly>
                             </div>
                         </div>
                     </form>
@@ -179,7 +179,10 @@ export default {
         this.cargarSucursales();
         // cargar horarios
         this.cargarHorarios();
+        // cargar cargos
         this.cargarCargos();
+        // cargar empleado solicitado, obtener parametro id de la url
+        this.getEmpleado(this.$route.params.id);
     },
     methods: {
         // método para obtener las sucursales
@@ -204,7 +207,7 @@ export default {
                 console.error(error);
             }
         },
-        // método para obtener los cargos que puede tener un empleado
+        // método para cargar los cargos que puede tener un cliente
         cargarCargos() {
             // realizar petición
             axios.get('http://localhost:3000/api/empleados/cargos')
@@ -212,44 +215,32 @@ export default {
                 .then(res => { this.cargos = res.data }) // cuando todo salga correcto asignar valores a arreglo
                 .catch(e => { console.error(e) }) // mostrar mensaje de error
         },
-        // método para agregar un nuevo empleado
-        crear() {
-            // validar datos
-            // realizar petición y enviando datos
-            axios.post('http://localhost:3000/api/empleados', this.model.empleado)
+        // método para obtener los datos del empleado seleccionado
+        getEmpleado(idempleado) {
+            axios.get('http://localhost:3000/api/empleados/' + idempleado)
                 .then(res => {
-                    // cuando hay un error 400 que no realizo lo que se debía
-                    if (res.data.error) {
-                        this.msg = 'Error con algún dato enviado';
-                        // console.log(res.data)
-                    }
-                    // cuando si se realizo la tarea deceada y se creo algo 
-                    // 201 es usado en método post y put
-                    if (res.status === 201 && !res.data.error) {
-                        // limpiar valores 
-                        this.model.empleado = {
-                            nombres: '',
-                            apellidos: '',
-                            dui: '',
-                            clave: '',
-                            planilla: '',
-                            telefono: '',
-                            correo: '',
-                            sucursal: 'Seleccionar',
-                            cargo: 'Seleccionar',
-                            horario: 'Seleccionar',
-                        }
-                        // redireccionar
-                        alert('Empleado agregado')
-                        this.$router.push('/empleados');
-                    }
-                    // console.log(res)
+                    // cargar los datos
 
-                    // sí la respuesta fue la esperada, redirección a la vista principal
-                    // if (res.status === 201) this.$router.push('/empleados');
+                    // guardar en una constante los datos obtenidos
+                    const EMPLEADO = res.data[0];
+                    // asignar a cada uno
+                    this.model.empleado = {
+                        nombres: EMPLEADO.nombres,
+                        apellidos: EMPLEADO.apellidos,
+                        dui: EMPLEADO.dui,
+                        correo: EMPLEADO.correo,
+                        planilla: EMPLEADO.planilla,
+                        telefono: EMPLEADO.telefono,
+                        sucursal: EMPLEADO.id_sucursal,
+                        cargo: EMPLEADO.id_cargo,
+                        horario: EMPLEADO.id_horario
+                    }
+                    console.log(EMPLEADO)
                 })
-                .catch(e => { alert(e) });
-
+                .catch(e => {
+                    // validar empleado inexistente
+                    alert(e);
+                })
         }
     }
 } 

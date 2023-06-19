@@ -7,6 +7,12 @@
     overflow-y: auto;
 }
 
+.card-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .cliente {
     height: 20%;
 }
@@ -61,7 +67,7 @@
                         <div class="col-md-1">
                             <span>consumo</span>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 card-buttons">
                             <div class="buttons">
                                 <router-link :to="{ path: '/clientes/editar/' + cliente.id_cliente }">
                                     <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"

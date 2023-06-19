@@ -28,7 +28,6 @@ const getSucursales = async (req, res) => {
     try {
         // realizar consulta
         const SUCURSALES = await POOL.query('SELECT id_sucursal, direccion FROM sucursales');
-        const HORARIOS = await POOL.query('SELECT * FROM horarios')
         // verificar respuesta satisfactoria, para enviar los datos
         if (res.status(200)) res.json(SUCURSALES.rows);
     } catch (error) {
@@ -80,22 +79,13 @@ const store = (req, res) => {
         POOL.query('INSERT INTO empleados(nombres, apellidos, dui, clave, planilla, telefono, correo,id_sucursal, id_horario, id_cargo) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10)',
             [nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo], (err, result) => {
 
-                // verificar sí hubo un error                
-                // if (err) {
-                //     // res.status(400);
-                //     // res.send(err.message);
-                //     msg = err.message;
-                //     // status = 400;
-                // } else {
-                //     msg = 'Empleado agregado';
-                //     status = 201;
-                // }
+                // verificar sí hubo un error                                
                 if (err) {
                     // sí es ejecuta esto, el status 201 no se enviará
                     res.json({ error: err.message});
                     return;
                 }
-                res.status(201).send('Empleado agregado' + 'INSERT INTO empleados(nombres, apellidos, dui, telefono, correo, clave, planilla, id_sucursal, id_horario, id_cargo) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10)' + [nombres, apellidos, dui, clave, planilla, telefono, correo, sucursal, horario, cargo]);
+                res.status(201).send('Empleado agregado');
                 // verificar estado satisfactorio
                 // res.status(201).send('Empleado agregado')
             })
@@ -104,5 +94,25 @@ const store = (req, res) => {
     }
 }
 
+/**
+ * Método para obtener los datos del empleado según el cliente requiera
+ */
+const one = async (req, res) => {
+    try {
+        // obtener del parametro de la url el id
+        const IDEMPLEADO = parseInt(req.params.id) ;
+        // convertirlo a entero, por sí el cliente modifica dato
+
+        // esperar la respuesta cuando se haga la consulta
+        const EMPLEADO = await POOL.query('SELECT * FROM empledos_view WHERE id_empleado = $1', [IDEMPLEADO]);
+        // verificar si no existe
+        // verificar sí el estado es el esperado
+        if (res.status(201)) { res.json(EMPLEADO.rows)};        
+    
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportación de modulos
-module.exports = { get, getSucursales, getHorarios, getCargos, store }
+module.exports = { get, getSucursales, getHorarios, getCargos, store, one }

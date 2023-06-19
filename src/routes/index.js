@@ -43,7 +43,7 @@ import crearDetalle from '../views/ordenes/detalle/crear.vue';
 //#region 
 // archivos de editar
 import editarCliente from '../views/clientes/editar.vue';
-
+import editarEmpleado from '../views/empleados/editar.vue';
 //#endregion
 
 // configuración
@@ -224,12 +224,17 @@ const ROUTER = createRouter({
 
 
 
-        // rutas de actualizar
+        // rutas de actualizar, reciben parametro de id
         // clientes
         {
             name: 'editarCliente',
             path: '/clientes/editar/:id',
             component: editarCliente
+        },
+        {
+            name: 'editarEmpleado',
+            path: '/empleados/editar/:id',
+            component: editarEmpleado
         },
 
 
