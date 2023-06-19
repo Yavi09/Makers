@@ -25,7 +25,7 @@
             <span>{{ msg }}</span>
         </div>
         <hr>
-        <form @submit.prevent="">
+        <form @submit.prevent="modificarEmpleado">
 
             <div class="container">
                 <div class="form-data">
@@ -136,7 +136,7 @@
                     <router-link to="/empleados" class="btn btn-makers">
                         Cancelar
                     </router-link>
-                    <button type="submit" class="btn btn-makers">Agregar</button>
+                    <button type="submit" class="btn btn-makers">Agregar cambios</button>
                 </div>
             </div>
         </form>
@@ -241,6 +241,48 @@ export default {
                     // validar empleado inexistente
                     alert(e);
                 })
+        },
+        // método para modificar los datos del cliente
+        modificarEmpleado() {
+            // obtener idempleado, del parametro establecido en index de routes del front llamado :'id'
+            let idempleado = this.$route.params.id;
+            // TODO: validar datos
+
+
+            // realizar petición al servidor
+            axios.put('http://localhost:3000/api/empleados/' + idempleado, this.model.empleado)
+                .then(res => {
+                    // cuando hay un error 400 que no realizo lo que se debía
+                    if (res.data.error) {
+                        this.msg = 'Error con algún dato enviado';
+                        // console.log(res.data)
+                    }
+                    // cuando si se realizo la tarea deceada y se creo algo 
+                    // 201 es usado en método post y put
+                    if (res.status === 201 && !res.data.error) {
+                        // limpiar valores 
+                        this.model.empleado = {
+                            nombres: '',
+                            apellidos: '',
+                            dui: '',
+                            clave: '',
+                            planilla: '',
+                            telefono: '',
+                            correo: '',
+                            sucursal: 'Seleccionar',
+                            cargo: 'Seleccionar',
+                            horario: 'Seleccionar',
+                        }
+                        // redireccionar
+                        alert('Empleado modificado')
+                        this.$router.push('/empleados');
+                    }
+                    // console.log(res)
+
+                    // sí la respuesta fue la esperada, redirección a la vista principal
+                    // if (res.status === 201) this.$router.push('/empleados');
+                })
+                .catch(e => { alert(e) });
         }
     }
 } 

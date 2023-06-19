@@ -82,7 +82,7 @@ const store = (req, res) => {
                 // verificar sí hubo un error                                
                 if (err) {
                     // sí es ejecuta esto, el status 201 no se enviará
-                    res.json({ error: err.message});
+                    res.json({ error: err.message });
                     return;
                 }
                 res.status(201).send('Empleado agregado');
@@ -100,19 +100,47 @@ const store = (req, res) => {
 const one = async (req, res) => {
     try {
         // obtener del parametro de la url el id
-        const IDEMPLEADO = parseInt(req.params.id) ;
+        const IDEMPLEADO = parseInt(req.params.id);
         // convertirlo a entero, por sí el cliente modifica dato
 
         // esperar la respuesta cuando se haga la consulta
         const EMPLEADO = await POOL.query('SELECT * FROM empledos_view WHERE id_empleado = $1', [IDEMPLEADO]);
         // verificar si no existe
         // verificar sí el estado es el esperado
-        if (res.status(201)) { res.json(EMPLEADO.rows)};        
-    
+        if (res.status(201)) { res.json(EMPLEADO.rows) };
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
+ * Método para actualizar los datos del empleado seleccionado
+ */
+const change = (req, res) => {
+    try {
+        // obtener id 
+        const IDEMPLEADO = parseInt(req.params.id);
+        // obtener los datos enviados del frontend
+        const { nombres, apellidos, dui, planilla, telefono, correo, sucursal, horario, cargo } = req.body;
+        // realizar transacción sql
+        POOL.query('UPDATE empleados SET nombres = $1, apellidos = $2, dui = $3, planilla = $4, telefono = $5, correo = $6 ,id_sucursal = $7, id_horario = $8, id_cargo = $9 WHERE id_empleado = $10',
+            [nombres, apellidos, dui, planilla, telefono, correo, sucursal, horario, cargo, IDEMPLEADO],
+            (err, result) => {
+                // verificar sí ha y un error
+                if (err) {
+                    // enviar mensaje de error
+                    res.json({ error: err.message });
+                    // retornar
+                    return;
+                }
+                res.status(201).send('Empleado modificado');
+            }
+        )
     } catch (error) {
         console.log(error);
     }
 }
 
 // exportación de modulos
-module.exports = { get, getSucursales, getHorarios, getCargos, store, one }
+module.exports = { get, getSucursales, getHorarios, getCargos, store, one, change }
