@@ -188,3 +188,8 @@ ORDER BY e.id_empleado ASC
 
 ALTER TABLE empleados DROP id_estado_empleado
 ALTER TABLE empleados ADD COLUMN estado INTEGER NOT NULL DEFAULT 1
+
+CREATE VIEW productos_view AS
+SELECT *
+FROM servicios
+WHERE id_tipo_servicio = (SELECT id_tipo_servicio FROM tipos_servicios WHERE tipo_servicio = 'Producto')
