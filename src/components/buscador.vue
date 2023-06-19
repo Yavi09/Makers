@@ -1,25 +1,3 @@
-<template>
-    <div class="container-buscador">
-        <svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-buscar">
-            <path d="M12.4046 21.5122C18.1509 21.5122 22.8092 17.1442 22.8092 11.7561C22.8092 6.36795 18.1509 2 12.4046 2C6.6583 2 2 6.36795 2 11.7561C2 17.1442 6.6583 21.5122 12.4046 21.5122Z" stroke="#B4B0AF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M26.711 27.0001L21.5087 22.1221" stroke="#B4B0AF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <input type="search" name="buscar" id="buscar" v-model="buscar" placeholder="Buscar">
-    </div>
-</template>
-<script>
-    export default {
-        name : 'buscador',
-        props : {},
-        data (){
-            return {
-                // dato que se obtiene del input
-                buscar : ''
-            }
-        }
-    }
-
-</script>
 <style>
 .container-buscador{
     padding: .5% 1.5%;    
@@ -52,3 +30,25 @@
     border: transparent 0px;
 }
 </style>
+<template>
+    <div class="container-buscador">
+        <svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-buscar">
+            <path d="M12.4046 21.5122C18.1509 21.5122 22.8092 17.1442 22.8092 11.7561C22.8092 6.36795 18.1509 2 12.4046 2C6.6583 2 2 6.36795 2 11.7561C2 17.1442 6.6583 21.5122 12.4046 21.5122Z" stroke="#B4B0AF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M26.711 27.0001L21.5087 22.1221" stroke="#B4B0AF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <input type="search" name="buscar" id="buscar" v-model="buscar" placeholder="Buscar">
+    </div>
+</template>
+<script>
+    export default {
+        name : 'buscador',
+        props : {},
+        data (){
+            return {
+                // dato que se obtiene del input
+                buscar : ''
+            }
+        }
+    }
+
+</script>

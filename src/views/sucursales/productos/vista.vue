@@ -19,13 +19,14 @@
     flex-wrap: wrap;
     align-content: stretch;
 }
+
 </style>
 <template>
     <!-- <div class="main"> -->
-    <div class="container servicios component-servicio">
+    <div class="container servicios component-servicio ">
         <div class="top">
             <span class="bold">Productos</span>
-            <router-link to="/sucursales/productos/crear" type="button" class="btn btn-makers">
+            <router-link :to="{ path: '/sucursales/'+this.$route.params.id+'/productos/crear'}" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
         </div>
@@ -43,7 +44,7 @@
                             <span class="card-text mb-0 smaller">{{ producto.cantidad }}</span>
                         </div>
                         <div class="col-md-6 more-info">
-                            <span>{{ producto.direccion }}</span>
+                            <!-- <span>{{ producto.direccion }}</span> -->
                         </div>
                         <div class="col-md-2 card-buttons">
                             <div class="buttons">

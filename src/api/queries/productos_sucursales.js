@@ -21,5 +21,17 @@ const get = async (req, res) => {
     }
 }
 
+const getProductos = async (req, res) => {
+    try {        
+        // realizar consulta
+        const PRODUCTOS = await POOL.query('SELECT id_servicio, nombre_servicio FROM productos_view WHERE existencias >= 1')
+        // verificar estado satisfactorio
+        // console.log(res)
+        if(res.status(200)) res.json(PRODUCTOS.rows);
+    } catch (error) { 
+        console.log(error);
+    }
+}
+
 // exportar modulos con los queries
-module.exports = { get };
+module.exports = { get, getProductos };
