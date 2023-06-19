@@ -69,11 +69,37 @@ const one = async (req, res) => {
         // realizar query
         const PRODUCTO = await POOL.query('SELECT * FROM detalles_servicios_sucursales WHERE id_detalle = $1', [DETALLE]);
         // vefificar respuesta satisfactoria
-        if(res.status(200)) res.json(PRODUCTO.rows[0]);
+        if (res.status(200)) res.json(PRODUCTO.rows[0]);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
+ * Método para actualizar datos según el registro seleccionado
+ */
+const change = (req, res) => {
+    try {
+        // obtener detalle de la url
+        const DETALLE = parseInt(req.params.id);
+        // enviando los datos nuevos
+        const { producto, cantidad } = req.body;
+        // realizar transacción sql,
+        POOL.query('UPDATE detalles_servicios_sucursales SET id_servicio = $1, cantidad = $2 WHERE id_detalle = $3', [producto, cantidad, DETALLE],
+            (err, result) => {
+                // verificar sí hay algún error
+                if (err) {
+                    // enviar mensaje de error
+                    res.json({ error: err.message });
+                    // retornar
+                    return;
+                }
+                res.status(201).send('Detalle modificado');
+            })
     } catch (error) {
         console.log(error);
     }
 }
 
 // exportar modulos con los queries
-module.exports = { get, getProductos, store, one };
+module.exports = { get, getProductos, store, one, change };

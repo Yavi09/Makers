@@ -25,7 +25,7 @@
         </div>
         <hr>
         <div class="container router-view">
-            <form @submit.prevent="">
+            <form @submit.prevent="modificarProducto">
                 <div class="form-data mb-24-2vh">
                     <span class="bold">
                         Producto
@@ -58,7 +58,7 @@
                             class="btn btn-makers">
                             Cancelar
                         </router-link>
-                        <button type="submit" class="btn btn-makers">Agregar</button>
+                        <button type="submit" class="btn btn-makers">Agregar cambios</button>
                     </div>
                 </div>
             </form>
@@ -70,7 +70,7 @@
 import axios from 'axios'
 export default {
     // nombre del componente
-    name: "crearProductoSucursal",
+    name: "editarProductoSucursal",
     // funciones que retornará el componente
     data() {
         return {
@@ -102,7 +102,7 @@ export default {
                 .catch(e => { console.log(e) })
         },
         cargar(detalle) {
-            axios.get('http://localhost:3000/api/sucursales/productos/detalle/'+detalle)
+            axios.get('http://localhost:3000/api/sucursales/productos/detalle/' + detalle)
                 .then(res => {
                     // cargar los valores
                     // const DETALLE = res.data[0];
@@ -112,9 +112,36 @@ export default {
                         cantidad: res.data.cantidad
                     }
                 })
-                .catch(e => {alert(e)})
+                .catch(e => { alert(e) })
+        },
+        modificarProducto() {
+            // obtener el id del detalle
+            let id = this.$route.params.detalle;
+            // validar datos
+            // realizar petición
+            axios.put('http://localhost:3000/api/sucursales/productos/' + id, this.model.producto)
+                .then(res => {
+                    // verificar errores
+                    if (res.data.error) {
+                        this.msg = 'Error con algún dato enviado'
+                    }
+                    // verificar sí se realizo la tarea como se deceaba
+                    // status = 201 en post y put
+                    if (res.status === 201 && !res.data.error) {
+                        // limipiar campos
+                        this.model.producto = {
+                            cantidad: '',
+                            producto: 'Seleccionar'
+                        }
+                        // redireccionar
+                        alert('Detalle modificado');
+                        this.msg = '';
+                        this.$router.push('/sucursales/'+this.$route.params.id+'/productos');
+                    }
+                })
+                .catch(err => { alert(err)})
         }
-        
+
     }
 }
 

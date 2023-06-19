@@ -148,7 +148,7 @@
 import axios from 'axios';
 // exportar componente
 export default {
-    name: 'crearEmpleado',
+    name: 'editarEmpleado',
     data() {
         return {
             // arreglo con info. sucursales
@@ -275,6 +275,7 @@ export default {
                         }
                         // redireccionar
                         alert('Empleado modificado')
+                        this.msg = '';
                         this.$router.push('/empleados');
                     }
                     // console.log(res)
