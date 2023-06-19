@@ -19,14 +19,14 @@
     flex-wrap: wrap;
     align-content: stretch;
 }
-
 </style>
 <template>
     <!-- <div class="main"> -->
     <div class="container servicios component-servicio ">
         <div class="top">
             <span class="bold">Productos</span>
-            <router-link :to="{ path: '/sucursales/'+this.$route.params.id+'/productos/crear'}" type="button" class="btn btn-makers">
+            <router-link :to="{ path: '/sucursales/' + this.$route.params.id + '/productos/crear' }" type="button"
+                class="btn btn-makers">
                 Agregar
             </router-link>
         </div>
@@ -49,25 +49,27 @@
                         <div class="col-md-2 card-buttons">
                             <div class="buttons">
                                 <!-- ':' y '{ }' habílitar poder escribir código vue dentro del " " -->
-                                <router-link :to="{ path: '/sucursales/'+this.$route.params.id+'/productos/editar/' + producto.id_detalle}">
+                                <router-link
+                                    :to="{ path: '/sucursales/' + this.$route.params.id + '/productos/editar/' + producto.id_detalle }">
                                     <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M15 36.6673H25C33.3333 36.6673 36.6667 33.334 36.6667 25.0007V15.0007C36.6667 6.66732 33.3333 3.33398 25 3.33398H15C6.66668 3.33398 3.33334 6.66732 3.33334 15.0007V25.0007C3.33334 33.334 6.66668 36.6673 15 36.6673Z"
-                                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                         <path
                                             d="M22.0571 10.0869L10.3944 22.2482C9.95039 22.7112 9.50638 23.6217 9.41757 24.2854L8.78116 28.9307C8.54435 30.6129 9.68398 31.7859 11.2972 31.5544L15.7521 30.8907C16.3738 30.7981 17.247 30.3351 17.7058 29.8722L29.3685 17.7109C31.3814 15.612 32.3286 13.1735 29.3685 10.0869C26.4084 7.00028 24.07 7.988 22.0571 10.0869Z"
                                             stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
                                             stroke-linejoin="round" />
-                                        <path d="M20.3847 11.8301C21.3763 15.5186 24.144 18.4046 27.6961 19.454" stroke="white"
-                                            stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
+                                        <path d="M20.3847 11.8301C21.3763 15.5186 24.144 18.4046 27.6961 19.454"
+                                            stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
                                 </router-link>
 
 
 
-                                <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
+                                <svg @click.prevent="eliminarDetalle(producto.id_detalle)" width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M15 36.6673H25C33.3333 36.6673 36.6667 33.334 36.6667 25.0007V15.0007C36.6667 6.66732 33.3333 3.33398 25 3.33398H15C6.66668 3.33398 3.33334 6.66732 3.33334 15.0007V25.0007C3.33334 33.334 6.66668 36.6673 15 36.6673Z"
@@ -122,6 +124,7 @@ export default {
     },
     // métodos
     methods: {
+        // método para obtener todos los según la sucursal
         getProductos(sucursal) {
             // validar sí hay una sucursal seleccionada
             if (!sucursal) {
@@ -138,6 +141,21 @@ export default {
                 .catch(e => {
                     alert(e)
                 })
+        },
+        // método para eliminar el registro obtenido
+        eliminarDetalle(detalle) {
+            // validar la respuesta del usuario
+            if (confirm('Desea eliminar este detalle?')) {
+                // realizar petición
+                axios.delete('http://localhost:3000/api/sucursales/productos/' + detalle)
+                    .then(res => {
+                        // mostrar mensaje
+                        alert(res.data);
+                        // cargar datos
+                        this.getProductos(this.$route.params.id);
+                    })
+                    .catch(e => alert(e));
+            }
         }
     }
 }

@@ -101,5 +101,29 @@ const change = (req, res) => {
     }
 }
 
+/**
+ * Método para eliminar el detalle seleccionado
+ */
+const destroy = async (req, res) => {
+    try {
+        // obtener el registro según id enviando al route 
+        const DETALLE = parseInt(req.params.id);
+        // realizar sentencia sql
+        await POOL.query('DELETE FROM detalles_servicios_sucursales WHERE id_detalle = $1', [DETALLE], (err, result) => {
+            // verificar errores
+            if (err) {
+                // enviar mensaje de error
+                res.json({error: err.message});
+                // retornar
+                return;
+            }
+            // mandar mensaje de proceso satisfecho
+            res.status(201).send('Detalle eliminado');
+        })     
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportar modulos con los queries
-module.exports = { get, getProductos, store, one, change };
+module.exports = { get, getProductos, store, one, change, destroy };
