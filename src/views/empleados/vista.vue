@@ -17,7 +17,7 @@
     height: 86%;
 }
 
-.info-empleo {
+.more-info {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -56,7 +56,7 @@
                             <p class="card-text mb-0 smaller">{{ empleado.dui }} </p>
                             <p class="card-text mb-0 smaller"> {{ empleado.telefono }} </p>
                         </div>
-                        <div class="col-md-6 info-empleo">
+                        <div class="col-md-6 more-info">
                             <span>{{ empleado.cargo }}</span>
                             <span>{{ empleado.direccion }}</span>
                             <span>{{ empleado.horario }}</span>
@@ -107,8 +107,13 @@
 
 
         </div>
+        <div class="data p-2" v-else-if="empleados.length === 0">
+            <span class="bold">
+                No se encontraron existencias
+            </span>
+        </div>
         <!-- si no hay clientes encontrados -->
-        <div class="clientes p-2" v-else>
+        <div class="data p-2" v-else>
             <span class="bold">
                 Cargando...
             </span>

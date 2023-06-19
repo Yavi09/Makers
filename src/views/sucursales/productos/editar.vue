@@ -25,7 +25,7 @@
         </div>
         <hr>
         <div class="container router-view">
-            <form @submit.prevent="crear">
+            <form @submit.prevent="modificarProducto">
                 <div class="form-data mb-24-2vh">
                     <span class="bold">
                         Producto
@@ -58,7 +58,7 @@
                             class="btn btn-makers">
                             Cancelar
                         </router-link>
-                        <button type="submit" class="btn btn-makers">Agregar</button>
+                        <button type="submit" class="btn btn-makers">Agregar cambios</button>
                     </div>
                 </div>
             </form>
@@ -70,7 +70,7 @@
 import axios from 'axios'
 export default {
     // nombre del componente
-    name: "crearProductoSucursal",
+    name: "editarProductoSucursal",
     // funciones que retornará el componente
     data() {
         return {
@@ -87,7 +87,9 @@ export default {
         }
     },
     mounted() {
+        // llamar aquí los método al cargar la página
         this.cargarProductos();
+        this.cargar(this.$route.params.detalle);
     },
     // métodos del componente
     methods: {
@@ -99,35 +101,47 @@ export default {
                 })
                 .catch(e => { console.log(e) })
         },
-        crear() {
-            console.log(this.model.producto)
-            // validar datos
-            axios.post('http://localhost:3000/api/sucursales/productos/', this.model.producto)
+        cargar(detalle) {
+            axios.get('http://localhost:3000/api/sucursales/productos/detalle/' + detalle)
                 .then(res => {
-                    // cuando hay un error que no realizo lo que se debía
-                    if (res.data.error) {
-                        this.msg = 'Error con algún dato enviado';
-                        // console.log(res.data)
-                    }else{
-                        this.msg = '';
+                    // cargar los valores
+                    // const DETALLE = res.data[0];
+                    // console.log(DETALLE);
+                    this.model.producto = {
+                        producto: res.data.id_servicio,
+                        cantidad: res.data.cantidad
                     }
-                    // cuando si se realizo la tarea deceada y se creo algo 
-                    // 201 es usado en método post y put
+                })
+                .catch(e => { alert(e) })
+        },
+        modificarProducto() {
+            // obtener el id del detalle
+            let id = this.$route.params.detalle;
+            // validar datos
+            // realizar petición
+            axios.put('http://localhost:3000/api/sucursales/productos/' + id, this.model.producto)
+                .then(res => {
+                    // verificar errores
+                    if (res.data.error) {
+                        this.msg = 'Error con algún dato enviado'
+                    }
+                    // verificar sí se realizo la tarea como se deceaba
+                    // status = 201 en post y put
                     if (res.status === 201 && !res.data.error) {
-                        // limpiar valores 
+                        // limipiar campos
                         this.model.producto = {
-                            cantidad: '',                                                
-                            producto: 'Seleccionar',
+                            cantidad: '',
+                            producto: 'Seleccionar'
                         }
                         // redireccionar
-                        alert('Producto agregado')
+                        alert('Detalle modificado');
+                        this.msg = '';
                         this.$router.push('/sucursales/'+this.$route.params.id+'/productos');
                     }
                 })
-                .catch(err => {
-                    alert(err)
-                })
+                .catch(err => { alert(err)})
         }
+
     }
 }
 

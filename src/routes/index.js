@@ -44,6 +44,7 @@ import crearDetalle from '../views/ordenes/detalle/crear.vue';
 // archivos de editar
 import editarCliente from '../views/clientes/editar.vue';
 import editarEmpleado from '../views/empleados/editar.vue';
+import editarProductoSucursal from '../views/sucursales/productos/editar.vue';
 //#endregion
 
 // configuración
@@ -140,12 +141,12 @@ const ROUTER = createRouter({
         // productos sucursales
         {
             name: 'productosSucursales',
-            path: '/sucursales/productos',
+            path: '/sucursales/:id/productos',
             component: productosSucursales
         },
         {
             name: 'detallesOrden',
-            path: '/ordenes/detalles',
+            path: '/ordenes/detalles/:id',
             component: detallesOrden
         },
         //#endregion
@@ -212,12 +213,12 @@ const ROUTER = createRouter({
         },
         {
             name: 'crearProductoSucursal',
-            path: '/sucursales/productos/crear',
+            path: '/sucursales/:id/productos/crear',
             component: crearProductoSucursal
         },
         {
             name: 'crearDetalle',
-            path: '/ordenes/detalles/crear',
+            path: '/ordenes/detalles/crear/:id',
             component: crearDetalle
         },
         // TODO: faltan algunos de crear
@@ -235,6 +236,11 @@ const ROUTER = createRouter({
             name: 'editarEmpleado',
             path: '/empleados/editar/:id',
             component: editarEmpleado
+        },
+        {
+            name: 'editarProductoSucursal',
+            path: '/sucursales/:id/productos/editar/:detalle',
+            component: editarProductoSucursal
         },
 
 
