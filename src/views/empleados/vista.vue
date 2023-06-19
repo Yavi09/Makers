@@ -64,7 +64,7 @@
                         <div class="col-md-2 card-buttons">
                             <div class="buttons">
                                 <!-- ':' y '{ }' habílitar poder escribir código vue dentro del " " -->
-                                <router-link :to="{ path: '/empleados/editar/' + empleado.id_empleado}">
+                                <router-link :to="{ path: '/empleados/editar/' + empleado.id_empleado }">
                                     <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -82,8 +82,8 @@
                                 </router-link>
 
 
-                                <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg @click.prevent="eliminarEmpleado(empleado.id_empleado)" width="40" height="40"
+                                    class="button" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M15 36.6673H25C33.3333 36.6673 36.6667 33.334 36.6667 25.0007V15.0007C36.6667 6.66732 33.3333 3.33398 25 3.33398H15C6.66668 3.33398 3.33334 6.66732 3.33334 15.0007V25.0007C3.33334 33.334 6.66668 36.6673 15 36.6673Z"
                                         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -127,11 +127,29 @@ export default {
         }
     },
     methods: {
+        // método para obtener los empleados
         getEmpledos() {
             // hacer petición
             axios.get('http://localhost:3000/api/empleados')
                 .then(res => { this.empleados = res.data })
-                .catch(e => { console.error(e) })
+                .catch(e => { alert(e) })
+
+        },
+        // método para eliminar el empleado seleccionado
+        eliminarEmpleado(idempleado) {
+            // validar la respuesta del usuario
+            if (confirm('Desea eliminar a este empleado?')) {
+                // realizar petición
+                axios.delete('http://localhost:3000/api/empleados/' + idempleado)
+                    .then(res => {
+                        // mostrar mensaje
+                        alert(res.data);
+                        // cargar los empleados
+                        this.getEmpledos();
+                    })
+                    .catch(e => { alert(e)})
+            }
+
 
         }
     },

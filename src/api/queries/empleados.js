@@ -142,5 +142,29 @@ const change = (req, res) => {
     }
 }
 
+/**
+ * Método para eliminar el empleado seleccionado
+ */
+const destroy = async (req, res) => {
+    try {
+        // obtener el idempleado
+        const IDEMPLEADO = parseInt(req.params.id);
+        // realizar transferencia sql o delete en este caso
+        await POOL.query('DELETE FROM empleados WHERE id_empleado = $1', [IDEMPLEADO], (err, resul) => {
+            // verificar sí hay un error
+            if (err) {
+                // obtener mensaje
+                res.json({ error: err.message });
+                // retornar
+                return;
+            }
+            // mandar mensaje sí no hay errores
+            res.status(201).send('Empleado eliminado');
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportación de modulos
-module.exports = { get, getSucursales, getHorarios, getCargos, store, one, change }
+module.exports = { get, getSucursales, getHorarios, getCargos, store, one, change, destroy }
