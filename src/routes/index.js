@@ -140,12 +140,12 @@ const ROUTER = createRouter({
         // productos sucursales
         {
             name: 'productosSucursales',
-            path: '/sucursales/productos',
+            path: '/sucursales/productos/:id',
             component: productosSucursales
         },
         {
             name: 'detallesOrden',
-            path: '/ordenes/detalles',
+            path: '/ordenes/detalles/:id',
             component: detallesOrden
         },
         //#endregion
@@ -212,12 +212,12 @@ const ROUTER = createRouter({
         },
         {
             name: 'crearProductoSucursal',
-            path: '/sucursales/productos/crear',
+            path: '/sucursales/productos/crear/:id',
             component: crearProductoSucursal
         },
         {
             name: 'crearDetalle',
-            path: '/ordenes/detalles/crear',
+            path: '/ordenes/detalles/crear/:id',
             component: crearDetalle
         },
         // TODO: faltan algunos de crear

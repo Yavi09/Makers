@@ -111,8 +111,13 @@
 
 
         </div>
+        <div class="data p-2" v-else-if="clientes.length === 0">
+            <span class="bold">
+                No se encontraron existencias
+            </span>
+        </div>
         <!-- si no hay clientes encontrados -->
-        <div class="clientes p-2" v-else>
+        <div class="data p-2" v-else>
             <span class="bold">
                 Cargando...
             </span>
