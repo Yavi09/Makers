@@ -1,10 +1,16 @@
 <style>
-.clientes {
+.data {
     display: flex;
     flex-direction: column;
     gap: 2vh;
     height: 85%;
     overflow-y: auto;
+}
+
+.card-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cliente {
@@ -42,13 +48,11 @@
             <router-link to="/clientes/crear" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
-            <button type="button" @click="toast" class="btn btn-makers">Ver</button>
-            <toast :msg="msg" :title="title" />
         </div>
         <hr>
         <!-- aquí cargar los clientes -->
         <!-- verificar sí hay clientes -->
-        <div class="clientes p-2" v-if="clientes.length > 0">
+        <div class="data p-2" v-if="clientes.length > 0">
             <!-- recorrer los clientes encontrados -->
 
             <div class="card" v-for="(cliente, i) in clientes" :key="i">
@@ -63,7 +67,7 @@
                         <div class="col-md-1">
                             <span>consumo</span>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 card-buttons">
                             <div class="buttons">
                                 <router-link :to="{ path: '/clientes/editar/' + cliente.id_cliente }">
                                     <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"

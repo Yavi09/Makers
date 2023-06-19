@@ -25,7 +25,7 @@
             <span>{{ msg }}</span>
         </div>
         <hr>
-        <form @submit.prevent="crear">
+        <form @submit.prevent="modificarEmpleado">
 
             <div class="container">
                 <div class="form-data">
@@ -125,7 +125,7 @@
                             </div>
                             <div class="mb-3 input-container width-35">
                                 <label for="clave" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="clave" v-model="this.model.empleado.clave">
+                                <input type="password" class="form-control" id="clave" readonly>
                             </div>
                         </div>
                     </form>
@@ -136,7 +136,7 @@
                     <router-link to="/empleados" class="btn btn-makers">
                         Cancelar
                     </router-link>
-                    <button type="submit" class="btn btn-makers">Agregar</button>
+                    <button type="submit" class="btn btn-makers">Agregar cambios</button>
                 </div>
             </div>
         </form>
@@ -179,7 +179,10 @@ export default {
         this.cargarSucursales();
         // cargar horarios
         this.cargarHorarios();
+        // cargar cargos
         this.cargarCargos();
+        // cargar empleado solicitado, obtener parametro id de la url
+        this.getEmpleado(this.$route.params.id);
     },
     methods: {
         // método para obtener las sucursales
@@ -204,7 +207,7 @@ export default {
                 console.error(error);
             }
         },
-        // método para obtener los cargos que puede tener un empleado
+        // método para cargar los cargos que puede tener un cliente
         cargarCargos() {
             // realizar petición
             axios.get('http://localhost:3000/api/empleados/cargos')
@@ -212,11 +215,42 @@ export default {
                 .then(res => { this.cargos = res.data }) // cuando todo salga correcto asignar valores a arreglo
                 .catch(e => { console.error(e) }) // mostrar mensaje de error
         },
-        // método para agregar un nuevo empleado
-        crear() {
-            // validar datos
-            // realizar petición y enviando datos
-            axios.post('http://localhost:3000/api/empleados', this.model.empleado)
+        // método para obtener los datos del empleado seleccionado
+        getEmpleado(idempleado) {
+            axios.get('http://localhost:3000/api/empleados/' + idempleado)
+                .then(res => {
+                    // cargar los datos
+
+                    // guardar en una constante los datos obtenidos
+                    const EMPLEADO = res.data[0];
+                    // asignar a cada uno
+                    this.model.empleado = {
+                        nombres: EMPLEADO.nombres,
+                        apellidos: EMPLEADO.apellidos,
+                        dui: EMPLEADO.dui,
+                        correo: EMPLEADO.correo,
+                        planilla: EMPLEADO.planilla,
+                        telefono: EMPLEADO.telefono,
+                        sucursal: EMPLEADO.id_sucursal,
+                        cargo: EMPLEADO.id_cargo,
+                        horario: EMPLEADO.id_horario
+                    }
+                    console.log(EMPLEADO)
+                })
+                .catch(e => {
+                    // validar empleado inexistente
+                    alert(e);
+                })
+        },
+        // método para modificar los datos del cliente
+        modificarEmpleado() {
+            // obtener idempleado, del parametro establecido en index de routes del front llamado :'id'
+            let idempleado = this.$route.params.id;
+            // TODO: validar datos
+
+
+            // realizar petición al servidor
+            axios.put('http://localhost:3000/api/empleados/' + idempleado, this.model.empleado)
                 .then(res => {
                     // cuando hay un error 400 que no realizo lo que se debía
                     if (res.data.error) {
@@ -240,7 +274,7 @@ export default {
                             horario: 'Seleccionar',
                         }
                         // redireccionar
-                        alert('Empleado agregado')
+                        alert('Empleado modificado')
                         this.$router.push('/empleados');
                     }
                     // console.log(res)
@@ -249,7 +283,6 @@ export default {
                     // if (res.status === 201) this.$router.push('/empleados');
                 })
                 .catch(e => { alert(e) });
-
         }
     }
 } 

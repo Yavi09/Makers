@@ -18,6 +18,9 @@ import horarios from '../views/horarios/vista.vue';
 import tipos from '../views/tipos_servicios/vista.vue';
 import cargos from '../views/cargos/vista.vue';
 import ordenes from '../views/ordenes/vista.vue';
+// vista de los formularios hijos
+import productosSucursales from '../views/sucursales/productos/vista.vue';
+import detallesOrden from '../views/ordenes/detalle/vista.vue';
 //#endregion
 
 //#region 
@@ -33,22 +36,28 @@ import crearOrden from '../views/ordenes/crear.vue';
 import crearSucursal from '../views/sucursales/crear.vue';
 import crearHorario from '../views/horarios/crear.vue';
 import crearFactura from '../views/facturas/crear.vue';
+import crearProductoSucursal from '../views/sucursales/productos/crear.vue';
+import crearDetalle from '../views/ordenes/detalle/crear.vue';
 //#endregion
 
 //#region 
 // archivos de editar
 import editarCliente from '../views/clientes/editar.vue';
-
+import editarEmpleado from '../views/empleados/editar.vue';
 //#endregion
 
 // configuración
 import config from '../views/configuracion.vue';
 
+// 404
+import notfound from '../views/404.vue';
 // intancia del enrutador
 const ROUTER = createRouter({
     // configuración del historial dentro de la ejecucción
     // se el valor asignado es la url que se utiliza para obtener 
     // la url base del proyecto
+    // hace la consulta a la al obj. routes, según el valor obtenido de la url
+    // para buscar el componente
     history: createWebHistory(import.meta.env.BASE_URL),
     // definiendo arreglo con las rutas
     routes: [
@@ -128,6 +137,17 @@ const ROUTER = createRouter({
             path: '/ordenes',
             component: ordenes
         },
+        // productos sucursales
+        {
+            name: 'productosSucursales',
+            path: '/sucursales/productos',
+            component: productosSucursales
+        },
+        {
+            name: 'detallesOrden',
+            path: '/ordenes/detalles',
+            component: detallesOrden
+        },
         //#endregion
 
         // rutas de crear
@@ -190,16 +210,31 @@ const ROUTER = createRouter({
             path: '/facturas/crear',
             component: crearFactura
         },
+        {
+            name: 'crearProductoSucursal',
+            path: '/sucursales/productos/crear',
+            component: crearProductoSucursal
+        },
+        {
+            name: 'crearDetalle',
+            path: '/ordenes/detalles/crear',
+            component: crearDetalle
+        },
         // TODO: faltan algunos de crear
 
 
 
-        // rutas de actualizar
+        // rutas de actualizar, reciben parametro de id
         // clientes
         {
             name: 'editarCliente',
             path: '/clientes/editar/:id',
             component: editarCliente
+        },
+        {
+            name: 'editarEmpleado',
+            path: '/empleados/editar/:id',
+            component: editarEmpleado
         },
 
 
@@ -208,6 +243,12 @@ const ROUTER = createRouter({
             name: 'configuracion',
             path: '/configuracion',
             component: config
+        },
+
+        // ruta cuando no se encontró la ruta
+        {
+            path: '/:pathMatch(.*)*',
+            component: notfound    
         }
     ]
 })
