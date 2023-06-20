@@ -73,5 +73,50 @@ const store = (req, res) => {
     }
 }
 
+/**
+ * Método para actualizar los datos según registro seleccionado
+ */
+const change = (req, res) => {
+    try {
+        // obtener id del detalle
+        const DETALLE = parseInt(req.params.id);
+        // obtener el cuerpo de datos
+        const { servicio, cantidad, descuento, orden } = req.body;
+        // realizar query y enviando parametros
+        POOL.query('UPDATE detalle_ordenes SET id_servicio = $1, cantidad = $2, descuento = $3, id_orden = $4 WHERE id_detalle = $5',
+            // aquí envio parametros
+            [servicio, cantidad, descuento, orden, DETALLE],
+            (err, result) => {
+                // verificar error
+                if (err) {
+                    // enviar mensaje de error
+                    res.json({ error: err.message });
+                    // retornar 
+                    return;
+                }
+                res.status(201).send('Detalle modificado')
+            }
+        )
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
+ * Método para obtener los datos del registro selecciondo
+ */
+const one = async (req, res) => {
+    try {
+        // obtener detalle
+        const ID = parseInt(req.params.id);
+        // realizar consulta
+        const DETALLE = await POOL.query('SELECT * FROM detalle_view WHERE id_detalle = $1', [ID])
+        // verificar respuesta satisfactoria
+        if(res.status(200)) res.json(DETALLE.rows);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // exportar modulos
-module.exports = { get, getTiposSerivicios, getServicios, store };
+module.exports = { get, getTiposSerivicios, getServicios, store, one, change };

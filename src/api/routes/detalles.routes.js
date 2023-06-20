@@ -1,7 +1,7 @@
 // requerir el enrutador de express
 const { Router } = require('express')
 // requerir los modulos con los queries
-const { get, getTiposSerivicios, getServicios, store } = require('../queries/detalle');
+const { get, getTiposSerivicios, getServicios, store, one, change } = require('../queries/detalle');
 
 // instanciar router
 const DETALLE = Router();
@@ -11,6 +11,8 @@ DETALLE.get('/tipos', getTiposSerivicios);
 DETALLE.get('/productos:tipo', getServicios);
 DETALLE.get('/:orden', get);
 DETALLE.post('/', store);
+DETALLE.get('/detalle/:id', one);
+DETALLE.put('/:id', change);
 
 // exportar modulo con las rutas
 module.exports = DETALLE;

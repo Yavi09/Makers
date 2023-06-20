@@ -198,3 +198,9 @@ CREATE VIEW productos_sucursales_view AS
 SELECT s.nombre_servicio, s.id_servicio, s.existencias, ds.cantidad, ds.id_detalle
 FROM detalles_servicios_sucursales ds
 INNER JOIN servicios s ON s.id_servicio = ds.id_servicio
+
+CREATE VIEW detalle_view AS
+SELECT d.id_detalle, s.id_servicio, s.nombre_servicio, d.descuento, d.cantidad, s.precio,
+		d.cantidad * s.precio as subtotal, d.id_orden
+FROM detalle_ordenes d
+INNER JOIN servicios s ON s.id_servicio = d.id_servicio

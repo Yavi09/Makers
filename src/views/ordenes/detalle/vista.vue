@@ -17,12 +17,13 @@
                     <div class="row fila">
                         <div class="col-md-4">
                             <h5 class="card-title bold mb-1">{{ detalle.nombre_servicio }}</h5>
+                            <p class="card-text mb-0 smaller"> {{ detalle.tipo_servicio }} </p>                            
                             <p class="card-text mb-0 smaller">{{ detalle.cantidad }} </p>
-                            <p class="card-text mb-0 smaller"> {{ detalle.descuento }}% </p>
 
                         </div>
                         <div class="col-md-6 more-info">
                             <span>${{ detalle.precio }}</span>
+                            <p class="card-text mb-0 smaller"> {{ detalle.descuento }}% </p>
                             <span class="bold">${{ detalle.subtotal }}</span>
                         </div>
                         <div class="col-md-2 card-buttons">

@@ -108,7 +108,7 @@ const destroy = async (req, res) => {
             }
 
             // enviando estado del proceso y mensaje
-            res.status(201).send('Cliente eliminado' + 'DELETE FROM clientes WHERE idcliente = $1' + [IDCLIENTE]);
+            res.status(201).send('Cliente eliminado');
 
         })
     } catch (error) {

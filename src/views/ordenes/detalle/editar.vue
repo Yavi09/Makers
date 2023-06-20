@@ -53,7 +53,7 @@
         </div>
         <hr>
         <div class="container">
-            <form @submit.prevent="crearDetalle">
+            <form @submit.prevent="">
                 <div class="form-data">
                     <form action="" class="form-1">
                         <div class="load">
