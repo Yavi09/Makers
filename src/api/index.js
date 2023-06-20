@@ -9,7 +9,8 @@ const CLIENTESROUTES = require('./routes/clientes.routes');
 const EMPLEADOSROUTES = require('./routes/empleados.routes');
 // requiriendo de las rutas para productos_sucursal
 const PRODUCTOS_SUCURALES = require('./routes/productos_sucursales.routes');
-
+// requerir de las rutas de detalle_orden
+const DETALLE = require('./routes/detalles.routes');
 
 // instanciando express
 const APP = EXPRESS();
@@ -26,6 +27,7 @@ APP.use(EXPRESS.json());
 APP.use('/api/clientes', CLIENTESROUTES);
 APP.use('/api/empleados', EMPLEADOSROUTES);
 APP.use('/api/sucursales/productos', PRODUCTOS_SUCURALES);
+APP.use('/api/ordenes/detalles', DETALLE)
 
 // escuchar al servidor
 APP.listen(APP.get('port'), () => {

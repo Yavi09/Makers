@@ -104,12 +104,12 @@ const change = (req, res) => {
 /**
  * Método para eliminar el detalle seleccionado
  */
-const destroy = async (req, res) => {
+const destroy = (req, res) => {
     try {
         // obtener el registro según id enviando al route 
         const DETALLE = parseInt(req.params.id);
         // realizar sentencia sql
-        await POOL.query('DELETE FROM detalles_servicios_sucursales WHERE id_detalle = $1', [DETALLE], (err, result) => {
+        POOL.query('DELETE FROM detalles_servicios_sucursales WHERE id_detalle = $1', [DETALLE], (err, result) => {
             // verificar errores
             if (err) {
                 // enviar mensaje de error

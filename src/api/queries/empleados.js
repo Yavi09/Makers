@@ -145,12 +145,12 @@ const change = (req, res) => {
 /**
  * Método para eliminar el empleado seleccionado
  */
-const destroy = async (req, res) => {
+const destroy = (req, res) => {
     try {
         // obtener el idempleado
         const IDEMPLEADO = parseInt(req.params.id);
         // realizar transferencia sql o delete en este caso
-        await POOL.query('DELETE FROM empleados WHERE id_empleado = $1', [IDEMPLEADO], (err, resul) => {
+        POOL.query('DELETE FROM empleados WHERE id_empleado = $1', [IDEMPLEADO], (err, resul) => {
             // verificar sí hay un error
             if (err) {
                 // obtener mensaje

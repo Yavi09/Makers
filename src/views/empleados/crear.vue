@@ -75,7 +75,7 @@
                                 <!-- verifiacr sí existen sucursales recuperadas -->
                                 <select class="form-select mb-3" aria-label="Default select example" id="sucursales"
                                     v-if="sucursales.length > 0" v-model="this.model.empleado.sucursal">
-                                    <option selected>Seleccionar</option>
+                                    <option selected disabled>Seleccionar</option>
                                     <!-- recorrer los datos de las sucursales -->
                                     <option v-for="(sucursal, i) in sucursales" :key="i" :value="sucursal.id_sucursal">{{
                                         sucursal.direccion }}</option>
@@ -90,7 +90,7 @@
                                 <!-- verifiacr sí existen sucursales recuperadas -->
                                 <select class="form-select mb-3" aria-label="Default select example" id="cargos"
                                     v-if="cargos.length > 0" v-model="this.model.empleado.cargo">
-                                    <option selected>Seleccionar</option>
+                                    <option selected disabled>Seleccionar</option>
                                     <!-- recorrer los datos de las sucursales -->
                                     <option v-for="(cargo, i) in cargos" :key="i" :value="cargo.id_cargo">{{
                                         cargo.cargo }}</option>
@@ -107,7 +107,7 @@
                                 <!-- verificar sí existen horarios -->
                                 <select class="form-select mb-3" aria-label="Default select example" id="horario"
                                     v-if="horarios.length > 0" v-model="this.model.empleado.horario">
-                                    <option selected>Seleccionar</option>
+                                    <option selected disabled>Seleccionar</option>
                                     <!-- recorrer los hotarios encontrados -->
                                     <option v-for="(horario, i) in horarios" :key="i" :value="horario.id_horario">
                                         {{ horario.inicio }} - {{ horario.cierre }}
