@@ -28,8 +28,8 @@
                         <div class="col-md-2 card-buttons">
                             <div class="buttons">
                                 <!-- ':' y '{ }' habílitar poder escribir código vue dentro del " " -->
-                                <!-- <router-link
-                                    :to="{ path: '/sucursales/' + this.$route.params.id + '/productos/editar/' + producto.id_detalle }"> -->
+                                <router-link
+                                    :to="{ path: '/ordenes/' + this.$route.params.orden + '/detalles/editar/' + detalle.id_detalle }">
                                     <svg width="40" height="40" class="button" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -44,7 +44,7 @@
                                             stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
-                                <!-- </router-link> -->
+                                </router-link>
 
 
 

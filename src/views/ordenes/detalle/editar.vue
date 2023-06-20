@@ -131,7 +131,7 @@
 import axios from 'axios'
 export default {
     // nombre del componente
-    name: "crearDetalle",
+    name: "editarDetalle",
     // funciones que retornará el componente
     data() {
         return {

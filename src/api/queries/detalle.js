@@ -54,7 +54,6 @@ const store = (req, res) => {
     try {
         // obtener los datos del frontend
         const { servicio, cantidad, descuento, orden } = req.body;
-        console.log(req.body)
         // realizar query
         POOL.query('INSERT INTO detalle_ordenes(id_servicio, cantidad, descuento, id_orden) VALUES ($1, $2, $3, $4)',
             [servicio, cantidad, descuento, orden],
