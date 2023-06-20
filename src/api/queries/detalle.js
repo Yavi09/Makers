@@ -31,5 +31,21 @@ const getTiposSerivicios = async (req, res) => {
     }
 }
 
+/**
+ * Método para obtener los servicios según el tipo de servicio
+ */
+const getServicios = async (req, res) => {
+    try {
+        // obtener el tipo de servicio
+        const TIPO = parseInt(req.params.tipo);
+        // realizar query 
+        const PRODUCTO = await POOL.query('SELECT id_servicio, nombre_servicio, existencias FROM servicios WHERE id_tipo_servicio = $1', [TIPO]);
+        // verificar respuesta satisfactoria
+        if (res.status(200)) res.json(PRODUCTO.rows);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportar modulos
-module.exports = { get, getTiposSerivicios };
+module.exports = { get, getTiposSerivicios, getServicios };

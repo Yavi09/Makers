@@ -58,23 +58,31 @@
                         <div class=" input-container">
                             <label for="" class="form-label">Tipo de servicio</label>
                             <!-- caso donde existan más de 0 tipos de servicios -->
-                            <select class="form-select mb-3" v-if="tipos.length > 0">
-                                <option selected>Seleccionar</option>
-                                <option v-for="(tipo, i) in tipos" :key="i" :value="tipo.id_tipo_servicio">{{ tipo.tipo_servicio }}</option>
-                            </select>                            
+                            <select class="form-select mb-3" v-if="tipos.length > 0" v-model="model.tipo.value"
+                                @change="cargarServicios" id="tipoServicio">
+                                <option selected disabled>Seleccionar</option>
+                                <option v-for="(tipo, i) in tipos" :key="i" :value="tipo.id_tipo_servicio" class="option"
+                                    v-text="tipo.tipo_servicio"></option>
+                            </select>
                             <!-- caso default-->
                             <select class="form-select mb-3" v-else>
                                 <option selected>No se encontraron tipos de servicio</option>
                             </select>
-                                                    
+
                         </div>
                         <div class="input-container">
                             <label for="" class="form-label">Servicio</label>
-                            <select class="form-select mb-3" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <!-- caso donde no sé haya seleccionar tipo de servicio -->
+                            <select class="form-select mb-3" v-if="model.tipo.value === 'Seleccionar'">
+                                <!-- verificar sí el cliente ha seleccionar un tipo de servicio -->
+                                <option selected disabled>Seleccionar</option>
+                            </select>
+                            <!-- caso donde se haya selecccionar el tipo de servicio -->
+                            <select class="form-select mb-3" v-if="model.tipo.value !== 'Seleccionar'">
+                                <!-- verificar sí el cliente ha seleccionar un tipo de servicio -->
+                                <option selected disabled>Seleccionar</option>
+                                <option v-for="(servicio, i) in servicios" :key="i" :value="servicio.id_servicio">
+                                    {{ servicio.nombre_servicio }}</option>
                             </select>
                         </div>
                     </div>
@@ -90,8 +98,14 @@
                         </div>
                         <div class="mb-3 input-container">
                             <label for="" class="form-label">Cantidad</label>
+                            <!-- verificar sí ha seleccionado producto -->
                             <!-- en max obtener la existencias del producto -->
-                            <input type="number" class="form-control" id="" min="1" max="">
+                            <!-- sí el tipo es producto entonces  se pueda editar-->
+                            <input v-if="model.tipo.txt === 'Producto'" type="number" class="form-control" id="" min="1"
+                                max="">
+                            <input v-else type="number" class="form-control" id="" min="1"
+                                max="" readonly>
+                            
                         </div>
                     </div>
                 </form>
@@ -115,11 +129,17 @@ export default {
     // funciones que retornará el componente
     data() {
         return {
+            // para cargar tipos
             tipos: [],
+            // cargar servicios
+            servicios: [],
             model: {
-                tipo: '',
+                tipo: {
+                    value: 'Seleccionar',
+                    txt: ''
+                },
                 pedido: {
-                    servicio: '',
+                    servicio: 'Seleccionar',
                     descuento: '',
                     cantidad: ''
                 }
@@ -136,7 +156,20 @@ export default {
             axios.get('http://localhost:3000/api/ordenes/detalles/tipos')
                 .then(res => { this.tipos = res.data; })
                 .catch(e => alert(e));
-        }
+        },
+        // método para obtener los servicios según el tipo 
+        cargarServicios(event) {
+            // obtener el id del tipo
+            this.model.tipo.value = event.target.value;
+            // obtener el texto del option para evaluar la cantidad
+            this.model.tipo.txt = event.target.options[event.target.selectedIndex].text;
+            // realizar petición
+            axios.get('http://localhost:3000/api/ordenes/detalles/productos' + this.model.tipo.value)
+                .then(res => {
+                    this.servicios = res.data;
+                })
+                .catch(e => alert(e));
+        }   
     }
 }
 

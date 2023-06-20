@@ -35,7 +35,7 @@
                         <!-- verifica sí existen productos -->
                         <select class="form-select mb-3" aria-label="Default select example" v-if="productos.length > 0"
                             v-model="this.model.producto.producto">
-                            <option selected>Seleccionar</option>
+                            <option selected disabled>Seleccionar</option>
                             <!-- recorrre los productos encontrados -->
                             <option v-for="(producto, i) in productos" :key="i" :value="producto.id_servicio">{{
                                 producto.nombre_servicio }}</option>
