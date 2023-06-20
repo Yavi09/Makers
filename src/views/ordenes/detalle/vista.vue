@@ -1,8 +1,8 @@
 <template>
-    <div class="container servicios component-servicio">
+    <div class="container servicios component-servicio h-100">
         <div class="top">
             <span class="bold">Pedidos de Orden No. {{ orden }}</span>
-            <router-link to="/ordenes/detalles/crear" type="button" class="btn btn-makers">
+            <router-link :to="{ path: '/ordenes/'+orden+'/detalles/crear/' }" type="button" class="btn btn-makers">
                 Agregar
             </router-link>
         </div>
@@ -16,11 +16,14 @@
                 <div class="card-body">
                     <div class="row fila">
                         <div class="col-md-4">
-                            <!-- <h5 class="card-title bold mb-1">{{ producto.nombre_servicio }}</h5> -->
-                            <!-- <span class="card-text mb-0 smaller">{{ producto.cantidad }}</span> -->
+                            <h5 class="card-title bold mb-1">{{ detalle.nombre_servicio }}</h5>
+                            <p class="card-text mb-0 smaller">{{ detalle.cantidad }} </p>
+                            <p class="card-text mb-0 smaller"> {{ detalle.descuento }}% </p>
+
                         </div>
                         <div class="col-md-6 more-info">
-                            <!-- <span>{{ producto.direccion }}</span> -->
+                            <span>${{ detalle.precio }}</span>
+                            <span class="bold">${{ detalle.subtotal }}</span>
                         </div>
                         <div class="col-md-2 card-buttons">
                             <div class="buttons">
@@ -104,7 +107,7 @@ export default {
             axios.get('http://localhost:3000/api/ordenes/detalles/' + this.$route.params.orden)
                 .then(res => {
                     console.log(res.data);
-                    this.detalle = res.data;
+                    this.detalles = res.data;
                 })
                 .catch(e => alert(e));
 

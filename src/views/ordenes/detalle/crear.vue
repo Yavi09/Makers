@@ -55,16 +55,21 @@
             <div class="form-data">
                 <form action="" class="form-1">
                     <div class="load">
-                        <div class="align-center switch-options input-container">
-                            <label class="form-check-label" for="">Producto</label>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input makers-switch" type="checkbox" role="switch" id="tipo"
-                                    checked>
-                            </div>
-                            <label class="form-check-label" for="">Servicio</label>
+                        <div class=" input-container">
+                            <label for="" class="form-label">Tipo de servicio</label>
+                            <!-- caso donde existan más de 0 tipos de servicios -->
+                            <select class="form-select mb-3" v-if="tipos.length > 0">
+                                <option selected>Seleccionar</option>
+                                <option v-for="(tipo, i) in tipos" :key="i" :value="tipo.id_tipo_servicio">{{ tipo.tipo_servicio }}</option>
+                            </select>                            
+                            <!-- caso default-->
+                            <select class="form-select mb-3" v-else>
+                                <option selected>No se encontraron tipos de servicio</option>
+                            </select>
+                                                    
                         </div>
                         <div class="input-container">
-                            <label for="" class="form-label">Seleccionar</label>
+                            <label for="" class="form-label">Servicio</label>
                             <select class="form-select mb-3" aria-label="Default select example">
                                 <option selected>Open this select menu</option>
                                 <option value="1">One</option>
@@ -93,7 +98,7 @@
             </div>
             <hr>
             <div class="buttons-reservacion form-data">
-                <router-link to="/sucursales/productos" class="btn btn-makers">
+                <router-link :to="{ path: '/ordenes/' + this.$route.params.orden + '/detalles' }" class="btn btn-makers">
                     Cancelar
                 </router-link>
                 <button type="button" class="btn btn-makers">Agregar</button>
@@ -103,18 +108,35 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     // nombre del componente
     name: "crearDetalle",
     // funciones que retornará el componente
     data() {
         return {
-
+            tipos: [],
+            model: {
+                tipo: '',
+                pedido: {
+                    servicio: '',
+                    descuento: '',
+                    cantidad: ''
+                }
+            }
         }
+    },
+    mounted() {
+        this.cargarTiposServicios();
     },
     // métodos del componente
     methods: {
-
+        // método para obtener los tipos de servicios
+        cargarTiposServicios() {
+            axios.get('http://localhost:3000/api/ordenes/detalles/tipos')
+                .then(res => { this.tipos = res.data; })
+                .catch(e => alert(e));
+        }
     }
 }
 

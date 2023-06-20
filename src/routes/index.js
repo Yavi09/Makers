@@ -218,7 +218,7 @@ const ROUTER = createRouter({
         },
         {
             name: 'crearDetalle',
-            path: '/ordenes/:id/detalles/crear/',
+            path: '/ordenes/:orden/detalles/crear/',
             component: crearDetalle
         },
         // TODO: faltan algunos de crear

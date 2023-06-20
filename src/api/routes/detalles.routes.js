@@ -1,12 +1,13 @@
 // requerir el enrutador de express
 const { Router } = require('express')
 // requerir los modulos con los queries
-const { get } = require('../queries/detalle');
+const { get, getTiposSerivicios } = require('../queries/detalle');
 
 // instanciar router
 const DETALLE = Router();
 
 // rutas donde se ejecutan métodos con los queries
+DETALLE.get('/tipos', getTiposSerivicios);
 DETALLE.get('/:orden', get);
 
 
