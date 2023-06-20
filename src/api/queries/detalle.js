@@ -118,5 +118,29 @@ const one = async (req, res) => {
     }
 }
 
+/**
+ * Método para eliminar el registro seleccionado
+ */
+const destroy = (req, res) => {
+    try {
+        // obtener detalle
+        const ID = parseInt(req.params.id);
+        // realizar consulta
+        POOL.query('DELETE FROM detalle_ordenes WHERE id_detalle = $1', [ID], (err, result) => {
+            // verifiacar sí hubo un error
+            if (err) {
+                // retornar error
+                res.json({ error: err.message});
+                // retornar
+                return;
+            }
+            // sí no huviera hubieron errores
+            res.status(201).send('Pedido eliminado');
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportar modulos
-module.exports = { get, getTiposSerivicios, getServicios, store, one, change };
+module.exports = { get, getTiposSerivicios, getServicios, store, one, change, destroy };
