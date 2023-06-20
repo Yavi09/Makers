@@ -146,7 +146,7 @@ const ROUTER = createRouter({
         },
         {
             name: 'detallesOrden',
-            path: '/ordenes/detalles/:id',
+            path: '/ordenes/:orden/detalles/',
             component: detallesOrden
         },
         //#endregion
@@ -218,7 +218,7 @@ const ROUTER = createRouter({
         },
         {
             name: 'crearDetalle',
-            path: '/ordenes/detalles/crear/:id',
+            path: '/ordenes/:id/detalles/crear/',
             component: crearDetalle
         },
         // TODO: faltan algunos de crear
