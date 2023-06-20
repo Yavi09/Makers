@@ -30,7 +30,7 @@ const store = async (req, res) => {
             (err, result) => {
                 // verificar sí existe error
                 if (err){
-                    res.send(err.message);
+                    res.json({error: err.message});
                 } 
                 // sino enviar estado exitoso
                 res.status(201).send('Cliente agregado' + 'INSERT INTO clientes(nombres, apellidos, dui, telefono, correo, clave, id_estado_usuario_cliente) VALUES ($1, $2, $3, $4, $5, $6, $7)'
@@ -78,7 +78,7 @@ const change = async (req, res) => {
             (err, results) => {
                 // verificar sí hay un error
                 if (err) {
-                    res.send(err.message);
+                    res.json({error: err.message});
                 }
                 res.status(201).send('Cliente modificado' + 'UPDATE clientes SET nombres = $1, apellidos = $2, dui = $3, telefono = $4, correo = $5, id_estado_usuario_cliente = $6' +
                     [nombres, apellidos, dui, telefono, correo, estado]);
@@ -95,7 +95,7 @@ const change = async (req, res) => {
  * req, datos del front
  * res, respuesta del servidor
  */
-const destroy = async (req, res) => {
+const destroy = (req, res) => {
     try {
         // console.log(req.params.id)
         // obtener el idcliente del parametro de la ruta
@@ -105,10 +105,11 @@ const destroy = async (req, res) => {
             if (err) {
                 // quebrar o detener y retornar msg-error
                 // throw err.message;
+                res.json({error: err.message});
             }
 
             // enviando estado del proceso y mensaje
-            res.status(201).send('Cliente eliminado' + 'DELETE FROM clientes WHERE idcliente = $1' + [IDCLIENTE]);
+            res.status(201).send('Cliente eliminado');
 
         })
     } catch (error) {

@@ -161,15 +161,18 @@ export default {
         // metodo para eliminar el cliente seleccionado
         eliminarCliente(idcliente) {
             // esperar confirmación
-            axios.delete('http://localhost:3000/api/clientes/' + idcliente)
-                .then(
-                    res => {
-                        // mandar alerta
-                        alert(res.data),
-                            // recargar los clientes
-                            this.obtenerClientes();
-                    }
-                )
+            if (confirm('Desea eliminar a este cliente?')) {
+                axios.delete('http://localhost:3000/api/clientes/' + idcliente)
+                    .then(
+                        res => {
+                            // mandar alerta
+                            alert(res.data),
+                                // recargar los clientes
+                                this.obtenerClientes();
+                        }
+                    )            
+                    .catch(e => alert(e));
+            }
         },
     }
 }

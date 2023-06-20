@@ -45,6 +45,7 @@ import crearDetalle from '../views/ordenes/detalle/crear.vue';
 import editarCliente from '../views/clientes/editar.vue';
 import editarEmpleado from '../views/empleados/editar.vue';
 import editarProductoSucursal from '../views/sucursales/productos/editar.vue';
+import editarDetalle from '../views/ordenes/detalle/editar.vue';
 //#endregion
 
 // configuración
@@ -146,7 +147,7 @@ const ROUTER = createRouter({
         },
         {
             name: 'detallesOrden',
-            path: '/ordenes/detalles/:id',
+            path: '/ordenes/:orden/detalles/',
             component: detallesOrden
         },
         //#endregion
@@ -218,7 +219,7 @@ const ROUTER = createRouter({
         },
         {
             name: 'crearDetalle',
-            path: '/ordenes/detalles/crear/:id',
+            path: '/ordenes/:orden/detalles/crear/',
             component: crearDetalle
         },
         // TODO: faltan algunos de crear
@@ -242,6 +243,11 @@ const ROUTER = createRouter({
             path: '/sucursales/:id/productos/editar/:detalle',
             component: editarProductoSucursal
         },
+        {
+            name: 'editarDetalleOrden',
+            path: '/ordenes/:id/detalles/editar/:detalle',
+            component: editarDetalle
+        },
 
 
         // configuración
@@ -254,7 +260,7 @@ const ROUTER = createRouter({
         // ruta cuando no se encontró la ruta
         {
             path: '/:pathMatch(.*)*',
-            component: notfound    
+            component: notfound
         }
     ]
 })

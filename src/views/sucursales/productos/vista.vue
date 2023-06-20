@@ -22,7 +22,7 @@
 </style>
 <template>
     <!-- <div class="main"> -->
-    <div class="container servicios component-servicio ">
+    <div class="container servicios component-servicio h-100">
         <div class="top">
             <span class="bold">Productos</span>
             <router-link :to="{ path: '/sucursales/' + this.$route.params.id + '/productos/crear' }" type="button"
