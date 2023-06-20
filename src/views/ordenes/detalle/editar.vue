@@ -120,7 +120,7 @@
                         class="btn btn-makers">
                         Cancelar
                     </router-link>
-                    <button type="submit" class="btn btn-makers">Agregar</button>
+                    <button type="submit" class="btn btn-makers">Agregar cambios</button>
                 </div>
             </form>
         </div>
@@ -148,7 +148,7 @@ export default {
                     servicio: 'Seleccionar',
                     descuento: '',
                     cantidad: '',
-                    orden: this.$route.params.orden
+                    orden: this.$route.params.id
                 }
             },
             msg: ''
@@ -202,7 +202,7 @@ export default {
                 this.model.pedido.descuento = 0;
             }
             // realizar petición enviandole el parametro de iddetalle de la url y los datos
-            console.log(this.model.pedido.orden);
+            console.log(this.$route.params.id + 'b');
             axios.put('http://localhost:3000/api/ordenes/detalles/' + this.$route.params.detalle, this.model.pedido)
                 .then(res => {
                     // verificar error                    
@@ -216,12 +216,12 @@ export default {
                             servicio: 'Seleccionar',
                             descuento: '',
                             cantidad: '',
-                            orden: this.$route.params.orden
+                            orden: this.$route.params.id
                         }
                         this.msg = '';
                         alert(res.data);
                         // redireccionar
-                        this.$router.push('/ordenes/' + this.$route.params.orden + '/detalles');
+                        this.$router.push('/ordenes/' + this.$route.params.id + '/detalles');
                     }
                 })
                 .catch(e => alert(e));
@@ -243,7 +243,8 @@ export default {
                     this.model.pedido = {
                         servicio: DETALLE.id_servicio,
                         descuento: DETALLE.descuento,
-                        cantidad: DETALLE.cantidad
+                        cantidad: DETALLE.cantidad,
+                        orden: this.$route.params.id
                     }
                     this.cargarServicios();
                 })                
