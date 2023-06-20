@@ -53,7 +53,7 @@
         </div>
         <hr>
         <div class="container">
-            <form @submit.prevent="">
+            <form @submit.prevent="modificarDetalle">
                 <div class="form-data">
                     <form action="" class="form-1">
                         <div class="load">
@@ -75,12 +75,12 @@
                             <div class="input-container">
                                 <label for="" class="form-label">Servicio</label>
                                 <!-- caso donde no sé haya seleccionar tipo de servicio -->
-                                <select class="form-select mb-3" v-if="model.tipo.value === 'Seleccionar'">
+                                <select class="form-select mb-3" v-if="model.tipo.txt === 'Seleccionar'">
                                     <!-- verificar sí el cliente ha seleccionar un tipo de servicio -->
                                     <option selected disabled>Seleccionar</option>
                                 </select>
                                 <!-- caso donde se haya selecccionar el tipo de servicio -->
-                                <select class="form-select mb-3" v-if="model.tipo.value !== 'Seleccionar'"
+                                <select class="form-select mb-3" v-if="model.tipo.txt !== 'Seleccionar'"
                                     v-model="model.pedido.servicio">
                                     <!-- verificar sí el cliente ha seleccionar un tipo de servicio -->
                                     <option selected disabled>Seleccionar</option>
@@ -155,6 +155,7 @@ export default {
         }
     },
     mounted() {
+        this.cargarDetalle();
         this.cargarTiposServicios();
     },
     // métodos del componente
@@ -167,12 +168,15 @@ export default {
         },
         // método para obtener los servicios según el tipo 
         cargarServicios(event) {
-            // recear valor texto de select servicio
-            this.model.pedido.servicio = 'Seleccionar'
-            // obtener el id del tipo
-            this.model.tipo.value = event.target.value;
-            // obtener el texto del option para evaluar la cantidad
-            this.model.tipo.txt = event.target.options[event.target.selectedIndex].text;
+            if (event) {
+                // recear valor texto de select servicio
+                this.model.pedido.servicio = 'Seleccionar'
+                // obtener el id del tipo
+                this.model.tipo.value = event.target.value;
+                // obtener el texto del option para evaluar la cantidad
+                this.model.tipo.txt = event.target.options[event.target.selectedIndex].text;
+                
+            }
             // realizar petición
             axios.get('http://localhost:3000/api/ordenes/detalles/productos' + this.model.tipo.value)
                 .then(res => {
@@ -180,7 +184,9 @@ export default {
                 })
                 .catch(e => alert(e));
         },
-        crearDetalle() {
+        // método para modificar los datos (UPDATE)
+        modificarDetalle() {
+            console.log(this.$route.params.detalle);
             // validar datos
             // asignar por defecto sí es un servicio el seleccionado y no agregado descuento ni cantidad
             if (!this.model.pedido.cantidad && !this.model.pedido.descuento && this.model.tipo.txt !== 'Producto') {
@@ -195,9 +201,9 @@ export default {
             if (!this.model.pedido.descuento) {
                 this.model.pedido.descuento = 0;
             }
-
-            // realizar petición
-            axios.post('http://localhost:3000/api/ordenes/detalles/', this.model.pedido)
+            // realizar petición enviandole el parametro de iddetalle de la url y los datos
+            console.log(this.model.pedido.orden);
+            axios.put('http://localhost:3000/api/ordenes/detalles/' + this.$route.params.detalle, this.model.pedido)
                 .then(res => {
                     // verificar error                    
                     if (res.data.error) {
@@ -219,8 +225,30 @@ export default {
                     }
                 })
                 .catch(e => alert(e));
-
+        },
+        // método para obtener los datos apartir del detalle
+        cargarDetalle() {
+            // obtener los datos del detalle
+            axios.get('http://localhost:3000/api/ordenes/detalles/detalle/' + this.$route.params.detalle)
+                .then(res => {
+                    // obtener los datos
+                    const DETALLE = res.data[0];
+                    console.log(DETALLE)
+                    // this.cargarServicios(event),
+                    // cargar los datos 
+                    this.model.tipo = {
+                        txt: DETALLE.tipo_servicio,
+                        value: DETALLE.id_tipo_servicio
+                    };
+                    this.model.pedido = {
+                        servicio: DETALLE.id_servicio,
+                        descuento: DETALLE.descuento,
+                        cantidad: DETALLE.cantidad
+                    }
+                    this.cargarServicios();
+                })                
         }
+
     }
 }
 

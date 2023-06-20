@@ -9,7 +9,7 @@ const DETALLE = Router();
 // rutas donde se ejecutan métodos con los queries
 DETALLE.get('/tipos', getTiposSerivicios);
 DETALLE.get('/productos:tipo', getServicios);
-DETALLE.get('/:orden', get);
+DETALLE.get('/orden/:orden', get);
 DETALLE.post('/', store);
 DETALLE.get('/detalle/:id', one);
 DETALLE.put('/:id', change);

@@ -105,7 +105,7 @@ export default {
     methods: {
         // método para obtener los detalles de esa orden
         getDetalles() {
-            axios.get('http://localhost:3000/api/ordenes/detalles/' + this.$route.params.orden)
+            axios.get('http://localhost:3000/api/ordenes/detalles/orden/' + this.$route.params.orden)
                 .then(res => {
                     console.log(res.data);
                     this.detalles = res.data;
