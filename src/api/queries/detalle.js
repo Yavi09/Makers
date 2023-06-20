@@ -47,5 +47,32 @@ const getServicios = async (req, res) => {
     }
 }
 
+/**
+ * Método para agregar un detalle según la orden
+ */
+const store = (req, res) => {
+    try {
+        // obtener los datos del frontend
+        const { servicio, cantidad, descuento, orden } = req.body;
+        console.log(req.body)
+        // realizar query
+        POOL.query('INSERT INTO detalle_ordenes(id_servicio, cantidad, descuento, id_orden) VALUES ($1, $2, $3, $4)',
+            [servicio, cantidad, descuento, orden],
+            (err, result) => {
+                // verificar sí hubo un error
+                if (err) {
+                    // enviar mensaje de error
+                    res.json({ error: err.message });
+                    // retornar
+                    return;
+                }
+                res.status(201).send('Detalle agregado');
+            }
+        )
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // exportar modulos
-module.exports = { get, getTiposSerivicios, getServicios };
+module.exports = { get, getTiposSerivicios, getServicios, store };
