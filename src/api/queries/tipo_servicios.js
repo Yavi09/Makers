@@ -24,7 +24,7 @@ const store = async (req, res) => {
         //asignar al arreglo los valores del req
         const { cargo } = req.body;
         // preparando query con los datos
-        POOL,query('INSERT INTO TipoServicios(tipo_servicio) VALUES ($1)', [tiposervicios],
+        POOL,query('INSERT INTO tipos_servicios(tipo_servicio) VALUES ($1)', [tiposervicios],
         //funcion
         (err, result) => {
             //verificar si hay error
