@@ -32,7 +32,7 @@ const store = async (req, res) => {
                 res.json({error:err.message});
             }
             //si no existe error, enviado exitosamente
-            res.status(201).send('tipo servicio agregado' + 'INSERT INTO TipoServicio(tipo_servicio) VALUES ($1)'
+            res.status(201).send('tipo servicio agregado' + 'INSERT INTO tipos_servicio(tipo_servicio) VALUES ($1)'
             + [tiposervicios]);
         })
     } catch (error) {

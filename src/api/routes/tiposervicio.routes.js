@@ -1,9 +1,9 @@
 // importar enrutador de express
 const { Router } = require('express');
 // importar métodos con las transferencias SQL
-const { store} = require('../queries/TipoServicios');
+const { store} = require('../queries/tipos_servicios');
 // importar validaciones
-const { validateTipoServicios, validateTipoServicios } = require('./../validators/TipoServicios')
+const { validateTipoServicios, validateTipoServicios } = require('./../validators/tipos_servicios')
 
 // instanciar router
 const SERVICIOS = Router();
